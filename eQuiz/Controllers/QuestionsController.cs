@@ -47,7 +47,7 @@ namespace eQuiz.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Text,AnswerId")] QuestionViewModel qvm)
+        public ActionResult Create(QuestionViewModel qvm) //[Bind(Include = "Id,Text,AnswerId")]
         {
             if (ModelState.IsValid)
             {
