@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using eQuiz.Models;
+using eQuiz.ViewModels;
 
 namespace eQuiz.Controllers
 {
@@ -46,16 +47,16 @@ namespace eQuiz.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Text,AnswerId")] Question question)
+        public ActionResult Create([Bind(Include = "Id,Text,AnswerId")] QuestionViewModel qvm)
         {
             if (ModelState.IsValid)
             {
-                db.Questions.Add(question);
+                db.Questions.Add(qvm.Question);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(question);
+            return View(qvm.Question);
         }
 
         // GET: Questions/Edit/5

@@ -9,6 +9,6 @@ namespace eQuiz.ViewModels
     public class QuestionViewModel
     {
         public Question Question { get; set; }
-        public ICollection<Answer> Answers { get; set; }
+        public IList<Answer> Answers { get; set; }
     }
 }

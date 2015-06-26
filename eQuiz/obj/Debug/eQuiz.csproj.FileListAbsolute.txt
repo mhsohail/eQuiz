@@ -53,3 +53,5 @@ C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\Microsoft.Owin.Security.MicrosoftAc
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.csprojResolveAssemblyReference.cache
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.dll
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.pdb
+C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.Migrations.InitialCreate.resources
+C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.csproj.GenerateResource.Cache
