@@ -27,7 +27,7 @@
                         @foreach(var Answer in item.Answers)
                         {
                             <p class="list-group-item-text">
-                                @Answer.Text
+                                @Answer.Text @((Answer.IsCorrect) ? " - Correct Answer" : string.Empty)
                             </p>
                         }
                     </div>
