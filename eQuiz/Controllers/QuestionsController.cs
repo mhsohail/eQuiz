@@ -29,11 +29,18 @@ namespace eQuiz.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Question question = db.Questions.Find(id);
+            List<Answer> Answers = question.Answers;
+            
+            var qvm = new QuestionViewModel();
+            qvm.Question = question;
+            qvm.Answers = Answers;
+
             if (question == null)
             {
                 return HttpNotFound();
             }
-            return View(question);
+            
+            return View(qvm);
         }
 
         // GET: Questions/Create
@@ -51,9 +58,24 @@ namespace eQuiz.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Questions.Add(qvm.Question);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    db.Questions.Add(qvm.Question);
+                    db.SaveChanges();
+
+                    foreach (var Answer in qvm.Answers)
+                    {
+                        if (Answer.Id.Equals(0))
+                        {
+                            Answer.QuestionId = qvm.Question.Id;
+                            db.Answers.Add(Answer);
+                            db.SaveChanges();
+                        }
+                    }
+
+                    return RedirectToAction("Index");
+                }
+                catch(Exception exc) { }
             }
 
             return View(qvm.Question);

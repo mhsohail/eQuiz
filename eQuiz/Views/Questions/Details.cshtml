@@ -1,4 +1,4 @@
-﻿@model eQuiz.Models.Question
+﻿@model eQuiz.ViewModels.QuestionViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -11,24 +11,37 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Text)
+            @Html.DisplayNameFor(model => model.Question.Id)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Text)
+            @Html.DisplayFor(model => model.Question.Id)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AnswerId)
+            @Html.DisplayNameFor(model => model.Question.Text)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AnswerId)
+            @Html.DisplayFor(model => model.Question.Text)
         </dd>
-
     </dl>
+    
+    <dl class="dl-horizontal">
+        @foreach (var Answer in Model.Answers)
+        {
+            <dt>
+                @Html.DisplayNameFor(model => Answer.Id)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => Answer.Text)
+            </dd>
+        }
+    </dl>
+
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Question.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

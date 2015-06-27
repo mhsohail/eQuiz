@@ -1,39 +1,38 @@
 ﻿@model IEnumerable<eQuiz.Models.Question>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Questions";
 }
-
-<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Text)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AnswerId)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Text)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AnswerId)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
-</table>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="list-group">
+                <a href="#" class="list-group-item active">Questions</a>
+                @foreach (var item in Model) {
+                    <div class="list-group-item">
+                        @item.Text
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </div>
+                    <div class="list-group-item">
+                        @*<h4 class="list-group-item-heading">
+                            List group item heading
+                        </h4>*@
+                        @foreach(var Answer in item.Answers)
+                        {
+                            <p class="list-group-item-text">
+                                @Answer.Text
+                            </p>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

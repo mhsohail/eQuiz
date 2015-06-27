@@ -11,8 +11,7 @@ namespace eQuiz.Models
         public int Id { get; set; }
         [Display(Name="Question")]
         public string Text { get; set; }
-        public int AnswerId { get; set; }
-
-        public virtual ICollection<Answer> Answers { get; set; }
+        
+        public virtual List<Answer> Answers { get; set; }
     }
 }
