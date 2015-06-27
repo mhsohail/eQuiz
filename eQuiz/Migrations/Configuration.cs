@@ -1,12 +1,14 @@
 namespace eQuiz.Migrations
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
+    using eQuiz.Models;
+using System;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
+using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<eQuiz.Models.eQuizContext>
     {
+        eQuizContext db = new eQuizContext();
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
@@ -28,6 +30,114 @@ namespace eQuiz.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
+            using (var Transaction = db.Database.BeginTransaction())
+            {
+                try
+                {
+                    // question 1
+                    var q1 = new Question();
+                    q1.Text = "Which Helper Method Returns binary output to write to the response?";
+                    db.Questions.Add(q1);
+                    db.SaveChanges();
+
+                    var a1 = new Answer();
+                    a1.Text = "Content";
+                    a1.IsCorrect = true;
+                    a1.QuestionId = q1.Id;
+                    db.Answers.Add(a1);
+
+                    var a2 = new Answer();
+                    a2.Text = "File";
+                    a2.IsCorrect = false;
+                    a2.QuestionId = q1.Id;
+                    db.Answers.Add(a2);
+
+                    var a3 = new Answer();
+                    a3.Text = "JavaScript";
+                    a3.IsCorrect = false;
+                    a3.QuestionId = q1.Id;
+                    db.Answers.Add(a3);
+
+                    var a4 = new Answer();
+                    a4.Text = "Json";
+                    a4.IsCorrect = false;
+                    a4.QuestionId = q1.Id;
+                    db.Answers.Add(a4);
+
+                    db.SaveChanges();
+
+                    // question 2
+                    var q2 = new Question();
+                    q2.Text = "Which Action Result Renders a partial view, which defines a section of a view that can be rendered inside another view?";
+                    db.Questions.Add(q2);
+                    db.SaveChanges();
+
+                    var q2a1 = new Answer();
+                    q2a1.Text = "ContentResult";
+                    q2a1.IsCorrect = false;
+                    q2a1.QuestionId = q2.Id;
+                    db.Answers.Add(q2a1);
+
+                    var q2a2 = new Answer();
+                    q2a2.Text = "RedirectResult";
+                    q2a2.IsCorrect = true;
+                    q2a2.QuestionId = q2.Id;
+                    db.Answers.Add(q2a2);
+
+                    var q2a3 = new Answer();
+                    q2a3.Text = "PartialViewResult";
+                    q2a3.IsCorrect = false;
+                    q2a3.QuestionId = q2.Id;
+                    db.Answers.Add(q2a3);
+
+                    var q2a4 = new Answer();
+                    q2a4.Text = "None of above.";
+                    q2a4.IsCorrect = false;
+                    q2a4.QuestionId = q2.Id;
+                    db.Answers.Add(q2a4);
+
+                    db.SaveChanges();
+
+                    // question 3
+                    var q3 = new Question();
+                    q3.Text = "The Controller class is responsible for the following processing stages:";
+                    db.Questions.Add(q3);
+                    db.SaveChanges();
+
+                    var q3a1 = new Answer();
+                    q3a1.Text = "Locating the appropriate action method to call and validating that it can be called";
+                    q3a1.IsCorrect = false;
+                    q3a1.QuestionId = q3.Id;
+                    db.Answers.Add(q3a1);
+
+                    var q3a2 = new Answer();
+                    q3a2.Text = "Getting the values to use as the action method's arguments";
+                    q3a2.IsCorrect = false;
+                    q3a2.QuestionId = q3.Id;
+                    db.Answers.Add(q3a2);
+
+                    var q3a3 = new Answer();
+                    q3a3.Text = "Handling all errors that might occur during the execution of the action method";
+                    q3a3.IsCorrect = false;
+                    q3a3.QuestionId = q3.Id;
+                    db.Answers.Add(q3a3);
+
+                    var q3a4 = new Answer();
+                    q3a4.Text = "All of the above.";
+                    q3a4.IsCorrect = true;
+                    q3a4.QuestionId = q3.Id;
+                    db.Answers.Add(q3a4);
+
+                    db.SaveChanges();
+
+                    Transaction.Commit();
+                }
+                catch(Exception exc)
+                {
+                    Transaction.Rollback();
+                }
+            }
         }
     }
 }

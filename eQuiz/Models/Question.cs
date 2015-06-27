@@ -10,6 +10,7 @@ namespace eQuiz.Models
     {
         public int Id { get; set; }
         [Display(Name="Question")]
+        [Required]
         public string Text { get; set; }
         
         public virtual List<Answer> Answers { get; set; }

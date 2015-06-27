@@ -24,12 +24,12 @@
                         @*<h4 class="list-group-item-heading">
                             List group item heading
                         </h4>*@
+                        <ul>
                         @foreach(var Answer in item.Answers)
                         {
-                            <p class="list-group-item-text">
-                                @Answer.Text @((Answer.IsCorrect) ? " - Correct Answer" : string.Empty)
-                            </p>
+                            <li class="list-group-item-text" style="@((Answer.IsCorrect) ? "color:#41a040;font-weight:bold;" : string.Empty)">@Answer.Text</li>
                         }
+                        </ul>
                     </div>
                 }
             </div>

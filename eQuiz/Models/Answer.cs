@@ -11,6 +11,7 @@ namespace eQuiz.Models
         public int Id { get; set; }
         
         [Display(Name="Answer")]
+        [Required]
         public string Text { get; set; }
         public bool IsCorrect { get; set; }
         public int QuestionId { get; set; }
