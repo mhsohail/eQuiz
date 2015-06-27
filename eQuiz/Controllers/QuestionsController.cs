@@ -89,11 +89,17 @@ namespace eQuiz.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Question question = db.Questions.Find(id);
+            List<Answer> Answers = question.Answers;
+
+            var qvm = new QuestionViewModel();
+            qvm.Question = question;
+            qvm.Answers = Answers;
+
             if (question == null)
             {
                 return HttpNotFound();
             }
-            return View(question);
+            return View(qvm);
         }
 
         // POST: Questions/Edit/5
@@ -101,15 +107,35 @@ namespace eQuiz.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Text,AnswerId")] Question question)
+        public ActionResult Edit(QuestionViewModel qvm) //[Bind(Include = "Id,Text,AnswerId")]
         {
             if (ModelState.IsValid)
             {
-                db.Entry(question).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    var ModifiedQuestion = qvm.Question;
+                    var Question = db.Questions.Find(ModifiedQuestion.Id);
+                    Question.Text = ModifiedQuestion.Text;
+
+                    db.Entry(Question).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    foreach (var ModifiedAnswer in qvm.Answers)
+                    {
+                        var Answer = db.Answers.Find(ModifiedAnswer.Id);
+                        Answer.Text = ModifiedAnswer.Text;
+                        Answer.IsCorrect = ModifiedAnswer.IsCorrect;
+
+                        db.Entry(Answer).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
+                    //db.Entry(qvm.Question).State = EntityState.Modified;
+                    //db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch(Exception exc) {}
             }
-            return View(question);
+            return View(qvm);
         }
 
         // GET: Questions/Delete/5
