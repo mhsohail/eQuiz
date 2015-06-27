@@ -29,7 +29,7 @@
                 @Html.EditorFor(model => model.Answers[0].Text, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Answers[0].Text, "", new { @class = "text-danger" })
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 checkbox">
                 @Html.EditorFor(model => model.Answers[0].IsCorrect, new { htmlAttributes = new { @class = "checkbox" } })
             </div>
         </div>
@@ -40,7 +40,7 @@
                 @Html.EditorFor(model => model.Answers[1].Text, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Answers[1].Text, "", new { @class = "text-danger" })
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 checkbox">
                 @Html.EditorFor(model => model.Answers[1].IsCorrect, new { htmlAttributes = new { @class = "checkbox" } })
             </div>
         </div>
@@ -51,7 +51,7 @@
                 @Html.EditorFor(model => model.Answers[2].Text, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Answers[2].Text, "", new { @class = "text-danger" })
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 checkbox">
                 @Html.EditorFor(model => model.Answers[2].IsCorrect, new { htmlAttributes = new { @class = "checkbox" } })
             </div>
         </div>
@@ -62,7 +62,7 @@
                 @Html.EditorFor(model => model.Answers[3].Text, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Answers[3].Text, "", new { @class = "text-danger" })
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 checkbox">
                 @Html.EditorFor(model => model.Answers[3].IsCorrect, new { htmlAttributes = new { @class = "checkbox" } })
             </div>
         </div>
