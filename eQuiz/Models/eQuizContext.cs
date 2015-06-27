@@ -22,7 +22,7 @@ namespace eQuiz.Models
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<eQuizContext, Configuration>());
             base.OnModelCreating(modelBuilder);
 
-            //  1-*  Video---Rating
+            //  1-*  Video---Answer
             modelBuilder.Entity<Question>()
                 .HasMany<Answer>(q => q.Answers)
                 .WithRequired(a => a.Question)

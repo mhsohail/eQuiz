@@ -3,7 +3,7 @@ namespace eQuiz.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class initial : DbMigration
     {
         public override void Up()
         {
@@ -13,7 +13,7 @@ namespace eQuiz.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Text = c.String(),
-                        IsCorrect = c.String(),
+                        IsCorrect = c.Boolean(nullable: false),
                         QuestionId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
@@ -26,7 +26,6 @@ namespace eQuiz.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Text = c.String(),
-                        AnswerId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             

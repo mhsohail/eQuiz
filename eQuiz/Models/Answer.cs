@@ -12,7 +12,7 @@ namespace eQuiz.Models
         
         [Display(Name="Answer")]
         public string Text { get; set; }
-        public string IsCorrect { get; set; }
+        public bool IsCorrect { get; set; }
         public int QuestionId { get; set; }
 
         public virtual Question Question { get; set; }
