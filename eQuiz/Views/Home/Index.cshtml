@@ -45,3 +45,25 @@
     });
 </script>
 <div id="clock"></div>
+
+<style>
+#parent {    
+    text-align: center;
+}
+#child {
+    margin: 0 auto;
+    display: inline-block;
+    background: red;
+    color: white;
+}
+</style>
+<div class="container" id="parent">
+    <div class="row">
+        <div class="col-lg-12">
+            @*text*@
+            <div class="row ">
+                @Html.ActionLink("Start Quiz", "Details", "Questions", new { id = ViewBag.FirstQuestionId }, new { @class = "btn btn-primary btn-lg" })
+            </div>
+        </div>
+    </div>
+</div>

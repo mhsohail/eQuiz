@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eQuiz.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,7 @@ namespace eQuiz.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.FirstQuestionId = new eQuizContext().Questions.OrderBy(q => q.Id).FirstOrDefault().Id;
             return View();
         }
 
