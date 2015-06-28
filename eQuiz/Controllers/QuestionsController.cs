@@ -22,8 +22,24 @@ namespace eQuiz.Controllers
         }
 
         // GET: Questions/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, QuestionViewModel SolvedQvm)
+        
         {
+
+            if (SolvedQvm != null && SolvedQvm.SelectedAnswerId != 0)
+            {
+                var QuestionToCheck = db.Questions.Find(SolvedQvm.Question.Id);
+                var CorrectAnswer = QuestionToCheck.Answers.SingleOrDefault(a => a.IsCorrect);
+                if (SolvedQvm.SelectedAnswerId == CorrectAnswer.Id)
+                {
+                    // answer is correct
+                }
+                else
+                { 
+                    // answer is incorrect
+                }
+            }
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

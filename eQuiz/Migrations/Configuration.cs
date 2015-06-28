@@ -1,10 +1,12 @@
 namespace eQuiz.Migrations
 {
     using eQuiz.Models;
-using System;
-using System.Data.Entity;
-using System.Data.Entity.Migrations;
-using System.Linq;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using System;
+    using System.Data.Entity;
+    using System.Data.Entity.Migrations;
+    using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<eQuiz.Models.eQuizContext>
     {
@@ -130,6 +132,24 @@ using System.Linq;
                     db.Answers.Add(q3a4);
 
                     db.SaveChanges();
+
+                    //this is for creating user
+                    var userStore = new UserStore<ApplicationUser>(db);
+                    var userManager = new UserManager<ApplicationUser>(userStore);
+                    if (!(db.Users.Any(u => u.UserName == "sohailx2x@yahoo.com")))
+                    {
+                        var userToInsert = new ApplicationUser { UserName = "sohailx2x@yahoo.com", Email = "sohailx2x@yahoo.com", PhoneNumber = "03035332033", LockoutEnabled = true };
+                        userManager.Create(userToInsert, "Sohail@2");
+                    }
+
+                    //this is for creating role
+                    RoleManager<IdentityRole> RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
+                    var role = new IdentityRole("Administrator");
+                    RoleManager.Create(role);
+
+                    //this is for assigning role that is created above
+                    ApplicationUser user = userManager.FindByNameAsync("sohailx2x@yahoo.com").Result;
+                    userManager.AddToRole(user.Id, role.Name);
 
                     Transaction.Commit();
                 }
