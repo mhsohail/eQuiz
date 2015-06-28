@@ -34,6 +34,7 @@ namespace eQuiz.Controllers
             var qvm = new QuestionViewModel();
             qvm.Question = question;
             qvm.Answers = Answers;
+            qvm.NextId = db.Questions.OrderBy(q => q.Id).FirstOrDefault(q => q.Id > id).Id;
 
             if (question == null)
             {

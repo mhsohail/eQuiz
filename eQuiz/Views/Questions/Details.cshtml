@@ -19,7 +19,7 @@
         </dd>
     </dl>
     
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Details", "Questions", new { id = Model.NextId }))
     {
         <div class="form-horizontal">
             @foreach (var Answer in Model.Answers)
@@ -34,7 +34,8 @@
             }
 
             <div class="form-group">
-                <div class="col-md-offset-4 col-md-8 col-sm-offset-4 col-sm-8">
+                @*<div class="col-md-offset-4 col-md-8 col-sm-offset-4 col-sm-8">*@
+                <div class="col-md-offset-2 col-md-10 col-sm-offset-2 col-sm-10">
                     <input type="submit" value="Next" class="btn btn-default" style="width:150px;" />
                 </div>
             </div>
