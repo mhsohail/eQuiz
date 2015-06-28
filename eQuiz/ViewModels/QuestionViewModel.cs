@@ -1,6 +1,7 @@
 ﻿using eQuiz.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -12,6 +13,7 @@ namespace eQuiz.ViewModels
         public List<Answer> Answers { get; set; }
         public int NextId { get; set; }
         public bool IsLastQuestion { get; set; }
+        [Required]
         public int SelectedAnswerId { get; set; }
     }
 }

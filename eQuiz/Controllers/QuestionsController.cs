@@ -23,16 +23,28 @@ namespace eQuiz.Controllers
 
         // GET: Questions/Details/5
         public ActionResult Details(int? id, QuestionViewModel SolvedQvm)
-        
         {
-
             if (SolvedQvm != null && SolvedQvm.SelectedAnswerId != 0)
             {
                 var QuestionToCheck = db.Questions.Find(SolvedQvm.Question.Id);
                 var CorrectAnswer = QuestionToCheck.Answers.SingleOrDefault(a => a.IsCorrect);
                 if (SolvedQvm.SelectedAnswerId == CorrectAnswer.Id)
                 {
-                    // answer is correct
+                    if (this.ControllerContext.HttpContext.Request.Cookies.AllKeys.Contains("TotalScore"))
+                    {
+                        HttpCookie cookie = this.ControllerContext.HttpContext.Request.Cookies["TotalScore"];
+                        //cookie.Expires = DateTime.Now.AddDays(-1); // remove the cookie
+                        int TotalScore = int.Parse(cookie.Value);
+                        TotalScore++;
+                        cookie.Value = TotalScore.ToString();
+                        this.ControllerContext.HttpContext.Response.Cookies.Add(cookie);
+                    }
+                    else
+                    {
+                        HttpCookie cookie = new HttpCookie("TotalScore");
+                        cookie.Value = "1";
+                        this.ControllerContext.HttpContext.Response.Cookies.Add(cookie);
+                    }
                 }
                 else
                 { 
