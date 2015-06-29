@@ -28,5 +28,17 @@ namespace eQuiz.Controllers
 
             return View();
         }
+
+        public ActionResult Result()
+        {
+            if (this.ControllerContext.HttpContext.Request.Cookies.AllKeys.Contains("TotalScore"))
+            {
+                HttpCookie cookie = this.ControllerContext.HttpContext.Request.Cookies["TotalScore"];
+                //cookie.Expires = DateTime.Now.AddDays(-1); // remove the cookie
+                ViewBag.TotalScore = int.Parse(cookie.Value);
+            }
+
+            return View();
+        }
     }
 }
