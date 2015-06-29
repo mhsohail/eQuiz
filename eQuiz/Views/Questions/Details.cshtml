@@ -20,7 +20,7 @@
         </dd>
     </dl>
     
-    @using (Html.BeginForm(((Model.IsLastQuestion) ? "Result" : "Details"), ((Model.IsLastQuestion) ? "Home" : "Questions"), new { id = Model.NextId }))
+    @using (Html.BeginForm(((Model.IsLastQuestion) ? "Result" : "Details"), ((Model.IsLastQuestion) ? "Home" : "Questions"), ((Model.IsLastQuestion) ? null : new { id = Model.NextId })))
     {
         <div class="form-horizontal">
             @Html.HiddenFor(model => model.Question.Id, new { Value = Model.Question.Id })
@@ -41,7 +41,7 @@
             <div class="form-group">
                 @*<div class="col-md-offset-4 col-md-8 col-sm-offset-4 col-sm-8">*@
                 <div class="col-md-offset-2 col-md-10 col-sm-offset-2 col-sm-10">
-                    <input type="submit" value="Next" class="btn btn-default" style="width:150px;" @((Model.IsLastQuestion) ? "disabled" : "") />
+                    <input type="submit" value="@((Model.IsLastQuestion) ? "Finish" : "Next")" class="btn btn-default" style="width:150px;" />
                 </div>
             </div>
         </div>
