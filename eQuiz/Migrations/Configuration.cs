@@ -15,7 +15,7 @@ namespace eQuiz.Migrations
         {
             AutomaticMigrationsEnabled = true;
             ContextKey = "eQuiz.Models.eQuizContext";
-            AutomaticMigrationDataLossAllowed = false;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(eQuiz.Models.eQuizContext context)

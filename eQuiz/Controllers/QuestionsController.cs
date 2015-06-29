@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using eQuiz.Models;
 using eQuiz.ViewModels;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace eQuiz.Controllers
 {
@@ -50,6 +52,18 @@ namespace eQuiz.Controllers
                 { 
                     // answer is incorrect
                 }
+
+                try
+                {
+                    var UserMngr = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                    var user = UserMngr.FindById(User.Identity.GetUserId());
+
+                    db.Questions.Attach(QuestionToCheck);
+                    db.Entry(QuestionToCheck).State = EntityState.Modified;
+                    user.SolvedQuestions.Add(QuestionToCheck);
+                    db.SaveChanges();
+                }
+                catch (Exception exc) { }
             }
 
             if (id == null)

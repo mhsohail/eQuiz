@@ -40,5 +40,10 @@ namespace eQuiz.Controllers
 
             return View();
         }
+
+        public ActionResult Counter()
+        {
+            return View();
+        }
     }
 }
