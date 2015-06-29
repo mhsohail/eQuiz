@@ -19,7 +19,7 @@ namespace eQuiz.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<eQuizContext, Configuration>());
+            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<eQuizContext, Configuration>());
             base.OnModelCreating(modelBuilder);
 
             //  1-*  Video---Answer

@@ -15,7 +15,7 @@ namespace eQuiz.Migrations
         {
             AutomaticMigrationsEnabled = true;
             ContextKey = "eQuiz.Models.eQuizContext";
-            AutomaticMigrationDataLossAllowed = true;
+            AutomaticMigrationDataLossAllowed = false;
         }
 
         protected override void Seed(eQuiz.Models.eQuizContext context)
@@ -33,6 +33,7 @@ namespace eQuiz.Migrations
             //    );
             //
 
+            /*
             using (var Transaction = db.Database.BeginTransaction())
             {
                 try
@@ -158,6 +159,7 @@ namespace eQuiz.Migrations
                     Transaction.Rollback();
                 }
             }
+            */
         }
     }
 }

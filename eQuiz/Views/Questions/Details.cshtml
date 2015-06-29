@@ -20,7 +20,7 @@
         </dd>
     </dl>
     
-    @using (Html.BeginForm("Details", "Questions", new { id = Model.NextId }))
+    @using (Html.BeginForm(((Model.IsLastQuestion) ? "Result" : "Details"), ((Model.IsLastQuestion) ? "Home" : "Questions"), new { id = Model.NextId }))
     {
         <div class="form-horizontal">
             @Html.HiddenFor(model => model.Question.Id, new { Value = Model.Question.Id })
