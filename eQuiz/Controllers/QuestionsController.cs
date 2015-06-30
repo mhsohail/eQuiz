@@ -18,12 +18,14 @@ namespace eQuiz.Controllers
         public eQuizContext db = new eQuizContext();
 
         // GET: Questions
+        [Authorize(Roles = "Administrator")]
         public ActionResult Index()
         {
             return View(db.Questions.ToList());
         }
 
         // GET: Questions/Details/5
+        [Authorize]
         public ActionResult Details(int? id, QuestionViewModel SolvedQvm)
         {
             Question QuestionToSolve = db.Questions.SingleOrDefault(q => q.QuestionId == id);
@@ -129,6 +131,7 @@ namespace eQuiz.Controllers
         }
 
         // GET: Questions/Create
+        [Authorize(Roles = "Administrator")]
         public ActionResult Create()
         {
             return View();
@@ -137,6 +140,7 @@ namespace eQuiz.Controllers
         // POST: Questions/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(QuestionViewModel qvm) //[Bind(Include = "Id,Text,AnswerId")]
@@ -167,6 +171,7 @@ namespace eQuiz.Controllers
         }
 
         // GET: Questions/Edit/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -192,6 +197,7 @@ namespace eQuiz.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(QuestionViewModel qvm) //[Bind(Include = "Id,Text,AnswerId")]
         {
             if (ModelState.IsValid)
@@ -224,6 +230,7 @@ namespace eQuiz.Controllers
         }
 
         // GET: Questions/Delete/5
+        [Authorize(Roles = "Administrator")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -241,6 +248,7 @@ namespace eQuiz.Controllers
         // POST: Questions/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public ActionResult DeleteConfirmed(int id)
         {
             Question question = db.Questions.Find(id);
