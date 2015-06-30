@@ -36,7 +36,7 @@ namespace eQuiz.Migrations
             
             using (var Transaction = db.Database.BeginTransaction())
             {
-                try
+                /*try
                 {
                     // question 1
                     var q1 = new Question();
@@ -157,7 +157,7 @@ namespace eQuiz.Migrations
                 catch(Exception exc)
                 {
                     Transaction.Rollback();
-                }
+                }*/
             }
             
         }
