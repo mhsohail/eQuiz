@@ -33,7 +33,7 @@ namespace eQuiz.Migrations
             //    );
             //
 
-            /*
+            
             using (var Transaction = db.Database.BeginTransaction())
             {
                 try
@@ -47,25 +47,25 @@ namespace eQuiz.Migrations
                     var a1 = new Answer();
                     a1.Text = "Content";
                     a1.IsCorrect = true;
-                    a1.QuestionId = q1.Id;
+                    a1.QuestionId = q1.QuestionId;
                     db.Answers.Add(a1);
 
                     var a2 = new Answer();
                     a2.Text = "File";
                     a2.IsCorrect = false;
-                    a2.QuestionId = q1.Id;
+                    a2.QuestionId = q1.QuestionId;
                     db.Answers.Add(a2);
 
                     var a3 = new Answer();
                     a3.Text = "JavaScript";
                     a3.IsCorrect = false;
-                    a3.QuestionId = q1.Id;
+                    a3.QuestionId = q1.QuestionId;
                     db.Answers.Add(a3);
 
                     var a4 = new Answer();
                     a4.Text = "Json";
                     a4.IsCorrect = false;
-                    a4.QuestionId = q1.Id;
+                    a4.QuestionId = q1.QuestionId;
                     db.Answers.Add(a4);
 
                     db.SaveChanges();
@@ -79,25 +79,25 @@ namespace eQuiz.Migrations
                     var q2a1 = new Answer();
                     q2a1.Text = "ContentResult";
                     q2a1.IsCorrect = false;
-                    q2a1.QuestionId = q2.Id;
+                    q2a1.QuestionId = q2.QuestionId;
                     db.Answers.Add(q2a1);
 
                     var q2a2 = new Answer();
                     q2a2.Text = "RedirectResult";
                     q2a2.IsCorrect = true;
-                    q2a2.QuestionId = q2.Id;
+                    q2a2.QuestionId = q2.QuestionId;
                     db.Answers.Add(q2a2);
 
                     var q2a3 = new Answer();
                     q2a3.Text = "PartialViewResult";
                     q2a3.IsCorrect = false;
-                    q2a3.QuestionId = q2.Id;
+                    q2a3.QuestionId = q2.QuestionId;
                     db.Answers.Add(q2a3);
 
                     var q2a4 = new Answer();
                     q2a4.Text = "None of above.";
                     q2a4.IsCorrect = false;
-                    q2a4.QuestionId = q2.Id;
+                    q2a4.QuestionId = q2.QuestionId;
                     db.Answers.Add(q2a4);
 
                     db.SaveChanges();
@@ -111,25 +111,25 @@ namespace eQuiz.Migrations
                     var q3a1 = new Answer();
                     q3a1.Text = "Locating the appropriate action method to call and validating that it can be called";
                     q3a1.IsCorrect = false;
-                    q3a1.QuestionId = q3.Id;
+                    q3a1.QuestionId = q3.QuestionId;
                     db.Answers.Add(q3a1);
 
                     var q3a2 = new Answer();
                     q3a2.Text = "Getting the values to use as the action method's arguments";
                     q3a2.IsCorrect = false;
-                    q3a2.QuestionId = q3.Id;
+                    q3a2.QuestionId = q3.QuestionId;
                     db.Answers.Add(q3a2);
 
                     var q3a3 = new Answer();
                     q3a3.Text = "Handling all errors that might occur during the execution of the action method";
                     q3a3.IsCorrect = false;
-                    q3a3.QuestionId = q3.Id;
+                    q3a3.QuestionId = q3.QuestionId;
                     db.Answers.Add(q3a3);
 
                     var q3a4 = new Answer();
                     q3a4.Text = "All of the above.";
                     q3a4.IsCorrect = true;
-                    q3a4.QuestionId = q3.Id;
+                    q3a4.QuestionId = q3.QuestionId;
                     db.Answers.Add(q3a4);
 
                     db.SaveChanges();
@@ -159,7 +159,7 @@ namespace eQuiz.Migrations
                     Transaction.Rollback();
                 }
             }
-            */
+            
         }
     }
 }
