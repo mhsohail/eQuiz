@@ -33,7 +33,7 @@ namespace eQuiz.Migrations
             //    );
             //
 
-            
+            /*
             using (var Transaction = db.Database.BeginTransaction())
             {
                 try
@@ -158,7 +158,7 @@ namespace eQuiz.Migrations
                 {
                     Transaction.Rollback();
                 }
-            }
+            }*/
         }
     }
 }
