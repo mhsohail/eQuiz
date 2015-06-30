@@ -11,7 +11,7 @@ namespace eQuiz.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.FirstQuestionId = new eQuizContext().Questions.OrderBy(q => q.Id).FirstOrDefault().Id;
+            ViewBag.FirstQuestionId = new eQuizContext().Questions.OrderBy(q => q.QuestionId).FirstOrDefault().QuestionId;
             return View();
         }
 
@@ -42,6 +42,11 @@ namespace eQuiz.Controllers
         }
 
         public ActionResult Counter()
+        {
+            return View();
+        }
+
+        public ActionResult Solved()
         {
             return View();
         }

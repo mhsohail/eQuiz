@@ -167,9 +167,21 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201506271353426_initial.cs" />
-    <Compile Include="Migrations\201506271353426_initial.Designer.cs">
-      <DependentUpon>201506271353426_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201506301217497_init.cs" />
+    <Compile Include="Migrations\201506301217497_init.Designer.cs">
+      <DependentUpon>201506301217497_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506301228022_IdentityIdUpdated.cs" />
+    <Compile Include="Migrations\201506301228022_IdentityIdUpdated.Designer.cs">
+      <DependentUpon>201506301228022_IdentityIdUpdated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506301245177_QuestionApplicationUsers_Table_ForeignKey_Name_Changed.cs" />
+    <Compile Include="Migrations\201506301245177_QuestionApplicationUsers_Table_ForeignKey_Name_Changed.Designer.cs">
+      <DependentUpon>201506301245177_QuestionApplicationUsers_Table_ForeignKey_Name_Changed.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506301251573_QuestionApplicationUsers_Table_ForeignKey_Name_Changed2.cs" />
+    <Compile Include="Migrations\201506301251573_QuestionApplicationUsers_Table_ForeignKey_Name_Changed2.Designer.cs">
+      <DependentUpon>201506301251573_QuestionApplicationUsers_Table_ForeignKey_Name_Changed2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -260,6 +272,7 @@
     <Content Include="Views\Questions\Index.cshtml" />
     <Content Include="Views\Home\Result.cshtml" />
     <Content Include="Views\Home\Counter.cshtml" />
+    <Content Include="Views\Home\Solved.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -269,8 +282,17 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201506271353426_initial.resx">
-      <DependentUpon>201506271353426_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201506301217497_init.resx">
+      <DependentUpon>201506301217497_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506301228022_IdentityIdUpdated.resx">
+      <DependentUpon>201506301228022_IdentityIdUpdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506301245177_QuestionApplicationUsers_Table_ForeignKey_Name_Changed.resx">
+      <DependentUpon>201506301245177_QuestionApplicationUsers_Table_ForeignKey_Name_Changed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506301251573_QuestionApplicationUsers_Table_ForeignKey_Name_Changed2.resx">
+      <DependentUpon>201506301251573_QuestionApplicationUsers_Table_ForeignKey_Name_Changed2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

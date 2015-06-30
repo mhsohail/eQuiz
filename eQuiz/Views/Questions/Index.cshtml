@@ -17,9 +17,9 @@
                 @foreach (var item in Model) {
                     <div class="list-group-item">
                         @item.Text
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        @Html.ActionLink("Edit", "Edit", new { id = item.QuestionId }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.QuestionId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.QuestionId })
                     </div>
                     <div class="list-group-item">
                         @*<h4 class="list-group-item-heading">

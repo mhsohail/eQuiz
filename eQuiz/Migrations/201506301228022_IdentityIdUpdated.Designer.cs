@@ -7,13 +7,13 @@ namespace eQuiz.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class initial : IMigrationMetadata
+    public sealed partial class IdentityIdUpdated : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(initial));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(IdentityIdUpdated));
         
         string IMigrationMetadata.Id
         {
-            get { return "201506271353426_initial"; }
+            get { return "201506301228022_IdentityIdUpdated"; }
         }
         
         string IMigrationMetadata.Source

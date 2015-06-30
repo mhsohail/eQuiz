@@ -19,6 +19,45 @@ namespace eQuiz.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public bool HasSolvedQuestion(Question Question)
+        {
+            foreach (var SolvedQuestion in this.SolvedQuestions)
+            {
+                if (SolvedQuestion.QuestionId == Question.QuestionId) { return true; }            
+            }
+            
+            return false;
+        }
+
+        public bool IsAheadOfNextUnsolvedQuestion(Question Question)
+        {
+            eQuizContext db = new eQuizContext();
+            var UnsolvedQuestions = this.GetUnsolvedQuestions();
+
+            foreach (Question UnsolvedQuestion in UnsolvedQuestions)
+            {
+                if (Question.QuestionId > UnsolvedQuestion.QuestionId) { return true; } return false;
+            }
+            return false;
+        }
+
+        public ICollection<Question> GetUnsolvedQuestions()
+        { 
+            eQuizContext db = new eQuizContext();
+            var Questions = db.Questions;
+            var UnsolvedQuestions = new List<Question>();
+
+            foreach (var Question in Questions)
+            {
+                if (!this.HasSolvedQuestion(Question))
+                {
+                    UnsolvedQuestions.Add(Question);
+                }
+            }
+
+            return UnsolvedQuestions;
+        }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

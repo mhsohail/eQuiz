@@ -27,17 +27,18 @@ namespace eQuiz.Models
                 .HasMany<Answer>(q => q.Answers)
                 .WithRequired(a => a.Question)
                 .HasForeignKey(a => a.QuestionId).WillCascadeOnDelete(true);
-
+            
             //  *-*  ApplicationUser---Answer
             modelBuilder.Entity<Question>()
                    .HasMany<ApplicationUser>(q => q.Candidates)
                    .WithMany(au => au.SolvedQuestions)
                    .Map(cs =>
                    {
-                       cs.MapLeftKey("Question_Id");
+                       cs.MapLeftKey("Question_QuestionId");
                        cs.MapRightKey("ApplicationUser_Id");
                        cs.ToTable("QuestionApplicationUsers");
                    });
+            
         }
     }
 }

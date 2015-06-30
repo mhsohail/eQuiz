@@ -15,7 +15,7 @@ namespace eQuiz.Controllers
 {
     public class QuestionsController : Controller
     {
-        private eQuizContext db = new eQuizContext();
+        public eQuizContext db = new eQuizContext();
 
         // GET: Questions
         public ActionResult Index()
@@ -26,11 +26,47 @@ namespace eQuiz.Controllers
         // GET: Questions/Details/5
         public ActionResult Details(int? id, QuestionViewModel SolvedQvm)
         {
+            Question QuestionToSolve = db.Questions.SingleOrDefault(q => q.QuestionId == id);
+            var UserMngr = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            //var user = UserMngr.FindById(User.Identity.GetUserId());
+            var UserId = User.Identity.GetUserId();
+            var user = db.Users.Where(u => u.Id == UserId).SingleOrDefault();
+
+            if (user.HasSolvedQuestion(QuestionToSolve))
+            {
+                // redirect to next unsolved question
+                var QuestionsInDb = db.Questions.OrderBy(q => q.QuestionId);
+                foreach (Question Question in QuestionsInDb)
+                {
+                    if (!user.HasSolvedQuestion(Question))
+                    {
+                        HttpCookie cookie = new HttpCookie("QuestionId", Question.QuestionId.ToString());
+                        Response.Cookies.Add(cookie);
+                        return RedirectToAction("Solved", "Home");
+                    }
+                }
+            }
+
+            if (user.IsAheadOfNextUnsolvedQuestion(QuestionToSolve))
+            {
+                // redirect to next unsolved question
+                var QuestionsInDb = db.Questions.OrderBy(q => q.QuestionId);
+                foreach (Question Question in QuestionsInDb)
+                {
+                    if (!user.HasSolvedQuestion(Question))
+                    {
+                        HttpCookie cookie = new HttpCookie("QuestionId", Question.QuestionId.ToString());
+                        Response.Cookies.Add(cookie);
+                        return RedirectToAction("Solved", "Home");
+                    }
+                }
+            }
+
             if (SolvedQvm != null && SolvedQvm.SelectedAnswerId != 0)
             {
-                var QuestionToCheck = db.Questions.Find(SolvedQvm.Question.Id);
+                var QuestionToCheck = db.Questions.Where(q => q.QuestionId == SolvedQvm.Question.QuestionId).SingleOrDefault();
                 var CorrectAnswer = QuestionToCheck.Answers.SingleOrDefault(a => a.IsCorrect);
-                if (SolvedQvm.SelectedAnswerId == CorrectAnswer.Id)
+                if (SolvedQvm.SelectedAnswerId == CorrectAnswer.AnswerId)
                 {
                     if (this.ControllerContext.HttpContext.Request.Cookies.AllKeys.Contains("TotalScore"))
                     {
@@ -55,13 +91,10 @@ namespace eQuiz.Controllers
 
                 try
                 {
-                    var UserMngr = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
-                    var user = UserMngr.FindById(User.Identity.GetUserId());
-
-                    db.Questions.Attach(QuestionToCheck);
-                    db.Entry(QuestionToCheck).State = EntityState.Modified;
                     user.SolvedQuestions.Add(QuestionToCheck);
+                    db.Questions.Attach(QuestionToCheck);
                     db.SaveChanges();
+                    
                 }
                 catch (Exception exc) { }
             }
@@ -70,16 +103,16 @@ namespace eQuiz.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Question question = db.Questions.Find(id);
-            List<Answer> Answers = question.Answers;
+
+            List<Answer> Answers = QuestionToSolve.Answers;
             
             var qvm = new QuestionViewModel();
-            qvm.Question = question;
+            qvm.Question = QuestionToSolve;
             qvm.Answers = Answers;
-            var NextQuestion = db.Questions.OrderBy(q => q.Id).FirstOrDefault(q => q.Id > id);
+            var NextQuestion = db.Questions.OrderBy(q => q.QuestionId).FirstOrDefault(q => q.QuestionId > id);
             if (NextQuestion != null)
             {
-                qvm.NextId = NextQuestion.Id;
+                qvm.NextId = NextQuestion.QuestionId;
                 qvm.IsLastQuestion = false;
             }
             else
@@ -87,7 +120,7 @@ namespace eQuiz.Controllers
                 qvm.IsLastQuestion = true;
             }
 
-            if (question == null)
+            if (QuestionToSolve == null)
             {
                 return HttpNotFound();
             }
@@ -117,9 +150,9 @@ namespace eQuiz.Controllers
 
                     foreach (var Answer in qvm.Answers)
                     {
-                        if (Answer.Id.Equals(0))
+                        if (Answer.AnswerId.Equals(0))
                         {
-                            Answer.QuestionId = qvm.Question.Id;
+                            Answer.QuestionId = qvm.Question.QuestionId;
                             db.Answers.Add(Answer);
                             db.SaveChanges();
                         }
@@ -166,7 +199,7 @@ namespace eQuiz.Controllers
                 try
                 {
                     var ModifiedQuestion = qvm.Question;
-                    var Question = db.Questions.Find(ModifiedQuestion.Id);
+                    var Question = db.Questions.Find(ModifiedQuestion.QuestionId);
                     Question.Text = ModifiedQuestion.Text;
 
                     db.Entry(Question).State = EntityState.Modified;
@@ -174,7 +207,7 @@ namespace eQuiz.Controllers
 
                     foreach (var ModifiedAnswer in qvm.Answers)
                     {
-                        var Answer = db.Answers.Find(ModifiedAnswer.Id);
+                        var Answer = db.Answers.Find(ModifiedAnswer.AnswerId);
                         Answer.Text = ModifiedAnswer.Text;
                         Answer.IsCorrect = ModifiedAnswer.IsCorrect;
 

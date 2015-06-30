@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Solved";
+}
+
+<h2>Solved</h2>
+
+<p>You have already solved this question. Redirecting you to the next unsolved question.</p>
+<script>
+
+    function getCookie(sKey) {
+        if (!sKey) { return null; }
+        //return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+        return document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + sKey.replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1") || null;
+        //Be aware that this method assumes that the key and value were encoded using encodeURIComponent(). Remove decode & encodeURIComponent() if the key and value of the cookie were not encoded.
+    }
+
+    var QuestionId = getCookie('QuestionId');
+    if (QuestionId != null) {
+        setTimeout(function () {
+            window.location = "/Questions/Details/" + QuestionId;
+        }, 2000);
+    }
+
+</script>

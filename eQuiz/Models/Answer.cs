@@ -8,7 +8,7 @@ namespace eQuiz.Models
 {
     public class Answer
     {
-        public int Id { get; set; }
+        public int AnswerId { get; set; }
         
         [Display(Name="Answer")]
         [Required]
