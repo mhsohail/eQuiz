@@ -41,5 +41,7 @@ namespace eQuiz.Models
                    });
             
         }
+
+        public System.Data.Entity.DbSet<eQuiz.Models.Test> Tests { get; set; }
     }
 }

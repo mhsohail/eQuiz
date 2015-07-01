@@ -13,7 +13,7 @@ namespace eQuiz.ViewModels
         public List<Answer> Answers { get; set; }
         public int NextId { get; set; }
         public bool IsLastQuestion { get; set; }
-        [Required]
+        [Required(ErrorMessage="Please choose an answer.")]
         public int SelectedAnswerId { get; set; }
     }
 }
