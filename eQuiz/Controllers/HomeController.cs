@@ -13,6 +13,7 @@ namespace eQuiz.Controllers
         
         public ActionResult Index()
         {
+            DateTime QuizStartTime = DateTime.Parse("2020/01/02 02:34:45 AM");
             ViewBag.FirstQuestionId = new eQuizContext().Questions.OrderBy(q => q.QuestionId).FirstOrDefault().QuestionId;
             return View();
         }

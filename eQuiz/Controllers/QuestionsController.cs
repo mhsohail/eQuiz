@@ -49,21 +49,6 @@ namespace eQuiz.Controllers
                 }
             }
 
-            if (user.IsAheadOfNextUnsolvedQuestion(QuestionToSolve))
-            {
-                // redirect to next unsolved question
-                var QuestionsInDb = db.Questions.OrderBy(q => q.QuestionId);
-                foreach (Question Question in QuestionsInDb)
-                {
-                    if (!user.HasSolvedQuestion(Question))
-                    {
-                        HttpCookie cookie = new HttpCookie("QuestionId", Question.QuestionId.ToString());
-                        Response.Cookies.Add(cookie);
-                        return RedirectToAction("Solved", "Home");
-                    }
-                }
-            }
-
             if (SolvedQvm != null && SolvedQvm.SelectedAnswerId != 0)
             {
                 var QuestionToCheck = db.Questions.Where(q => q.QuestionId == SolvedQvm.Question.QuestionId).SingleOrDefault();
@@ -106,8 +91,22 @@ namespace eQuiz.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
+            if (user.IsAheadOfNextUnsolvedQuestion(QuestionToSolve))
+            {
+                // redirect to next unsolved question
+                var QuestionsInDb = db.Questions.OrderBy(q => q.QuestionId);
+                foreach (Question Question in QuestionsInDb)
+                {
+                    if (!user.HasSolvedQuestion(Question))
+                    {
+                        HttpCookie cookie = new HttpCookie("QuestionId", Question.QuestionId.ToString());
+                        Response.Cookies.Add(cookie);
+                        return RedirectToAction("Solved", "Home");
+                    }
+                }
+            }
+
             List<Answer> Answers = QuestionToSolve.Answers;
-            
             var qvm = new QuestionViewModel();
             qvm.Question = QuestionToSolve;
             qvm.Answers = Answers;
