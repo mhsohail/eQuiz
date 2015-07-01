@@ -15,7 +15,7 @@ namespace eQuiz
     {
         protected void Application_Start()
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<eQuizContext, Configuration>());
+            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<eQuizContext, Configuration>());
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

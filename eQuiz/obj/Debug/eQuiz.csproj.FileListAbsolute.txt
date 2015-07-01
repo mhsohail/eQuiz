@@ -114,7 +114,6 @@ C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.csproj.GenerateResource
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.Migrations.IdentityIdUpdated.resources
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.Migrations.QuestionApplicationUsers_Table_ForeignKey_Name_Changed.resources
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.Migrations.QuestionApplicationUsers_Table_ForeignKey_Name_Changed2.resources
-C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.csprojResolveAssemblyReference.cache
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.Migrations.SettingModelCreated.resources
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.Migrations.SettingModelCreated1.resources
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.Migrations.SettingModelFieldNamesChanged.resources
