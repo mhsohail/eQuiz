@@ -161,6 +161,36 @@ namespace eQuiz.Migrations
                     Transaction.Rollback();
                 }
             }
+
+            using (var Transaction = db.Database.BeginTransaction())
+            {
+                try
+                {
+                    var Settings = db.Settings.ToList();
+                    bool QuizStartTimeSettingExists = false;
+                    
+                    foreach (var Setting in Settings)
+                    {
+                        if (!Setting.Name.Contains("Quiz Start Time"))
+                        {
+                            QuizStartTimeSettingExists = true;
+                            break;
+                        }
+                    }
+
+                    if (!QuizStartTimeSettingExists)
+                    {
+                        db.Settings.Add(new Setting { Name = "Quiz Start Time", Value = "2020/01/01" });
+                        db.SaveChanges();
+                    }
+                    
+                    Transaction.Commit();
+                }
+                catch (Exception exc)
+                {
+                    Transaction.Rollback();
+                }
+            }
         }
     }
 }

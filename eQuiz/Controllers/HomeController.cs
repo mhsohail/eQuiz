@@ -69,12 +69,7 @@ namespace eQuiz.Controllers
             foreach (var Setting in Settings)
             {
                 var SettingDb = db.Settings.SingleOrDefault(s => s.SettingId == Setting.SettingId);
-                if (SettingDb == null)
-                {
-                    db.Settings.Add(Setting);
-                    db.SaveChanges();
-                }
-                else
+                if (SettingDb != null)
                 {
                     SettingDb.Value = Setting.Value;
                     db.SaveChanges();
