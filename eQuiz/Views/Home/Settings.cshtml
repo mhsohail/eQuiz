@@ -1,0 +1,30 @@
+﻿@model List<eQuiz.Models.Setting>
+
+@{
+    ViewBag.Title = "Settings";
+}
+
+<h2>Settings</h2>
+@using (Html.BeginForm("CreateSettings", "Home"))
+{
+    @*@Html.EditorFor(model => Model[i].Name)*@
+    
+    for (int i = 0; i < Model.Count(); i++)
+    {
+        <div class="form-group">
+            @Html.Label(Model[i].Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.Hidden("Settings[" + i + "].SettingId", Model[i].SettingId)
+                @Html.Hidden("Settings[" + i + "].Name", Model[i].Name)
+                @Html.TextBox("Settings[" + i + "].Value", Model[i].Value, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => Model[i].Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    }
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+}

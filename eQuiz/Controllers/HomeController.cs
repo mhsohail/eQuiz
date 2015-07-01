@@ -9,6 +9,8 @@ namespace eQuiz.Controllers
 {
     public class HomeController : Controller
     {
+        eQuizContext db = new eQuizContext();
+        
         public ActionResult Index()
         {
             ViewBag.FirstQuestionId = new eQuizContext().Questions.OrderBy(q => q.QuestionId).FirstOrDefault().QuestionId;
@@ -29,6 +31,7 @@ namespace eQuiz.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult Result()
         {
             if (this.ControllerContext.HttpContext.Request.Cookies.AllKeys.Contains("TotalScore"))
@@ -46,9 +49,39 @@ namespace eQuiz.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult Solved()
         {
             return View();
+        }
+
+        [Authorize(Roles = "Administrator")]
+        public ActionResult Settings()
+        {
+            var Settings = db.Settings.ToList();
+            return View(Settings);
+        }
+
+        [Authorize(Roles="Administrator")]
+        [HttpPost]
+        public ActionResult CreateSettings(List<Setting> Settings)
+        {
+            foreach (var Setting in Settings)
+            {
+                var SettingDb = db.Settings.SingleOrDefault(s => s.SettingId == Setting.SettingId);
+                if (SettingDb == null)
+                {
+                    db.Settings.Add(Setting);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    SettingDb.Value = Setting.Value;
+                    db.SaveChanges();
+                }
+            }
+
+            return RedirectToAction("Settings");
         }
     }
 }
