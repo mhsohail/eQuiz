@@ -4,17 +4,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using eQuiz.ViewModels;
+using eQuiz.Helpers;
 
 namespace eQuiz.Controllers
 {
     public class HomeController : Controller
     {
         eQuizContext db = new eQuizContext();
-        
+        ApplicationUser user = null;
+
+        public HomeController()
+        {
+            
+        }
+        [Authorize]
         public ActionResult Index()
         {
+            var UserId = User.Identity.GetUserId();
+            user = db.Users.Where(u => u.Id == UserId).SingleOrDefault();
             DateTime QuizStartTime = DateTime.Parse("2020/01/02 02:34:45 AM");
-            ViewBag.FirstQuestionId = new eQuizContext().Questions.OrderBy(q => q.QuestionId).FirstOrDefault().QuestionId;
+            var UnsolvedQuestions = user.GetUnsolvedQuestions();
+            if (UnsolvedQuestions.Count == 0)
+            {
+                ViewBag.FirstQuestionId = 0;
+            }
+            else
+            {
+                ViewBag.FirstQuestionId = UnsolvedQuestions.OrderBy(q => q.QuestionId).FirstOrDefault().QuestionId;
+            }
+            //ViewBag.FirstQuestionId = new eQuizContext().Questions.OrderBy(q => q.QuestionId).FirstOrDefault().QuestionId;
+            
             return View();
         }
 
@@ -33,8 +55,12 @@ namespace eQuiz.Controllers
         }
 
         [Authorize]
-        public ActionResult Result()
+        public ActionResult Result(QuestionViewModel SolvedQvm)
         {
+            var UserId = User.Identity.GetUserId();
+            user = db.Users.Where(u => u.Id == UserId).SingleOrDefault();
+            QuestionHelper.CheckQuestion(SolvedQvm, this, user, db);
+            
             if (this.ControllerContext.HttpContext.Request.Cookies.AllKeys.Contains("TotalScore"))
             {
                 HttpCookie cookie = this.ControllerContext.HttpContext.Request.Cookies["TotalScore"];

@@ -5,7 +5,11 @@
 
 <h2>Solved</h2>
 
-<p>You have already solved this question. Redirecting you to the next unsolved question.</p>
+<div class="row">
+    <div class="col-md-12" id="msg">
+        
+    </div>
+</div>
 <script>
 
     function getCookie(sKey) {
@@ -14,12 +18,19 @@
         return document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + sKey.replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1") || null;
         //Be aware that this method assumes that the key and value were encoded using encodeURIComponent(). Remove decode & encodeURIComponent() if the key and value of the cookie were not encoded.
     }
-
-    var QuestionId = getCookie('QuestionId');
-    if (QuestionId != null) {
-        setTimeout(function () {
-            window.location = "/Questions/Details/" + QuestionId;
-        }, 2000);
+    
+    var QuestionId = Number(getCookie('QuestionId'));
+    var QuizSolved = Boolean(getCookie("QuizSolved"));
+    
+    if (typeof QuizSolved !== "undefined" && QuizSolved !== "" && QuizSolved !== null && QuizSolved === true) {
+        document.getElementById("msg").innerHTML = "<p>You have already solved the quiz.</p>";
+    } else {
+        alert(QuizSolved);
+        if (typeof QuestionId !== "undefined" && QuestionId !== "" && QuestionId !== null && QuestionId === true) {
+            document.getElementById("msg").innerHTML = "<p>You have already solved this question. Redirecting you to the next unsolved question.</p>";
+            setTimeout(function () {
+                window.location = "/Questions/Details/" + QuestionId;
+            }, 2000);
+        }
     }
-
 </script>

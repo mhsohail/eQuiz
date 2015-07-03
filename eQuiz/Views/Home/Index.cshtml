@@ -3,11 +3,11 @@
     //Layout = string.Empty;
 }
 
-<div class="jumbotron">
+@*<div class="jumbotron">
     <h1>Guinness World Record Quiz</h1>
     <p class="lead">Descriptoin goes here...</p>
     <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+</div>*@
 
 @*<div class="row">
     <div class="col-md-4">
@@ -133,7 +133,11 @@
             }).on('update.countdown', function () {
                 //console.log("update...");
             }).on('finish.countdown', function () {
-                window.location = "/Questions/Details/" + document.getElementById("FirstQuestionId").value;
+                if (document.getElementById("FirstQuestionId").value == 0) {
+                    document.getElementById("start-quiz").innerHTML = "<p>You have already compelted the quiz.</p>"
+                } else {
+                    window.location = "/Questions/Details/" + document.getElementById("FirstQuestionId").value;
+                }
             });
         });
     </script>
@@ -162,7 +166,7 @@
     <div class="row">
         <div class="col-lg-12">
             @*text*@
-            <div class="row ">
+            <div class="row" id="start-quiz">
                 @Html.ActionLink("Start Quiz", "Details", "Questions", new { id = ViewBag.FirstQuestionId }, new { @class = "btn btn-primary btn-lg" })
                 @Html.Hidden("FirstQuestionId", (int)ViewBag.FirstQuestionId, new { id = "FirstQuestionId", Name = "FirstQuestionId" })
             </div>

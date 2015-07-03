@@ -10,6 +10,7 @@ using eQuiz.Models;
 using eQuiz.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using eQuiz.Helpers;
 
 namespace eQuiz.Controllers
 {
@@ -34,6 +35,14 @@ namespace eQuiz.Controllers
             var UserId = User.Identity.GetUserId();
             var user = db.Users.Where(u => u.Id == UserId).SingleOrDefault();
 
+            var UnsolvedQuestions = user.GetUnsolvedQuestions();
+            if (UnsolvedQuestions.Count == 0)
+            {
+                HttpCookie cookie = new HttpCookie("QuizSolved", true.ToString());
+                Response.Cookies.Add(cookie);
+                return RedirectToAction("Solved", "Home");
+            }
+
             if (user.HasSolvedQuestion(QuestionToSolve))
             {
                 // redirect to next unsolved question
@@ -51,39 +60,7 @@ namespace eQuiz.Controllers
 
             if (SolvedQvm != null && SolvedQvm.SelectedAnswerId != 0)
             {
-                var QuestionToCheck = db.Questions.Where(q => q.QuestionId == SolvedQvm.Question.QuestionId).SingleOrDefault();
-                var CorrectAnswer = QuestionToCheck.Answers.SingleOrDefault(a => a.IsCorrect);
-                if (SolvedQvm.SelectedAnswerId == CorrectAnswer.AnswerId)
-                {
-                    if (this.ControllerContext.HttpContext.Request.Cookies.AllKeys.Contains("TotalScore"))
-                    {
-                        HttpCookie cookie = this.ControllerContext.HttpContext.Request.Cookies["TotalScore"];
-                        //cookie.Expires = DateTime.Now.AddDays(-1); // remove the cookie
-                        int TotalScore = int.Parse(cookie.Value);
-                        TotalScore++;
-                        cookie.Value = TotalScore.ToString();
-                        this.ControllerContext.HttpContext.Response.Cookies.Add(cookie);
-                    }
-                    else
-                    {
-                        HttpCookie cookie = new HttpCookie("TotalScore");
-                        cookie.Value = "1";
-                        this.ControllerContext.HttpContext.Response.Cookies.Add(cookie);
-                    }
-                }
-                else
-                { 
-                    // answer is incorrect
-                }
-
-                try
-                {
-                    user.SolvedQuestions.Add(QuestionToCheck);
-                    db.Questions.Attach(QuestionToCheck);
-                    db.SaveChanges();
-                    
-                }
-                catch (Exception exc) { }
+                QuestionHelper.CheckQuestion(SolvedQvm, this, user, db);
             }
 
             if (id == null)
