@@ -25,7 +25,7 @@ namespace eQuiz.Controllers
         {
             var UserId = User.Identity.GetUserId();
             user = db.Users.Where(u => u.Id == UserId).SingleOrDefault();
-            DateTime QuizStartTime = DateTime.Parse("2020/01/02 02:34:45 AM");
+            
             var UnsolvedQuestions = user.GetUnsolvedQuestions();
             if (UnsolvedQuestions.Count == 0)
             {
@@ -37,6 +37,9 @@ namespace eQuiz.Controllers
             }
             //ViewBag.FirstQuestionId = new eQuizContext().Questions.OrderBy(q => q.QuestionId).FirstOrDefault().QuestionId;
             
+            var QuizStartTime = DateTime.Parse(db.Settings.SingleOrDefault(s => s.Name == "Quiz Start Time").Value);
+            ViewBag.QuizStartTime = db.Settings.SingleOrDefault(s => s.Name == "Quiz Start Time").Value;
+
             return View();
         }
 
@@ -104,6 +107,11 @@ namespace eQuiz.Controllers
             }
 
             return RedirectToAction("Settings");
+        }
+
+        public ActionResult DateTimePicker()
+        {
+            return View();
         }
     }
 }

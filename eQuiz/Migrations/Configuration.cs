@@ -171,7 +171,7 @@ namespace eQuiz.Migrations
                     
                     foreach (var Setting in Settings)
                     {
-                        if (!Setting.Name.Contains("Quiz Start Time"))
+                        if (Setting.Name.Contains("Quiz Start Time"))
                         {
                             QuizStartTimeSettingExists = true;
                             break;
