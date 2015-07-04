@@ -77,11 +77,7 @@ namespace eQuiz.Controllers
                 var QuizEndTime = db.QuestionUsers.OrderByDescending(qu => qu.EndTime).FirstOrDefault().EndTime;
 
                 TimeSpan TimeSpan = QuizEndTime.Subtract(QuizStartTime);
-                Console.WriteLine("Time Difference (seconds): " + TimeSpan.Seconds);
-                Console.WriteLine("Time Difference (minutes): " + TimeSpan.Minutes);
-                Console.WriteLine("Time Difference (hours): " + TimeSpan.Hours);
-                Console.WriteLine("Time Difference (days): " + TimeSpan.Days);
-
+                
                 ViewBag.TimeSpan = TimeSpan;
                 ViewBag.CorrectAnswers = CorrectAnswers;
                 ViewBag.TotalQuestions = db.Questions.ToList().Count;
@@ -153,10 +149,29 @@ namespace eQuiz.Controllers
         [Authorize(Roles="Administrator")]
         public ActionResult QuizInfo()
         {
-            var UserId = User.Identity.GetUserId();
-            user = db.Users.Where(u => u.Id == UserId).SingleOrDefault();
+            var AppUsers = db.Users.ToList();
+            var QuizInfos = new List<QuizInfoViewModel>();
 
-            return View();
+            foreach (var AppUser in AppUsers)
+            {
+                var QuestionUsers = AppUser.QuestionUsers.ToList();
+                QuizInfoViewModel qifv = new QuizInfoViewModel();
+                
+                var CorrectAnswersCount = QuestionUsers.Where(
+                    qu => qu.ApplicationUserId.Equals(AppUser.Id) &&
+                    qu.IsCorrect).Count();
+
+                var QuizStartTime = QuestionUsers.OrderBy(qu => qu.StartTime).FirstOrDefault().StartTime;
+                var QuizEndTime = QuestionUsers.OrderByDescending(qu => qu.EndTime).FirstOrDefault().EndTime;
+                qifv.QuizTime = QuizEndTime.Subtract(QuizStartTime);
+                qifv.UserFullName = AppUser.FirstName + " " + AppUser.LastName;
+                qifv.CorrectAnswersCount = CorrectAnswersCount;
+                QuizInfos.Add(qifv);
+            }
+
+            QuizInfos = QuizInfos.OrderBy(qi => qi.QuizTime).ToList();
+
+            return View(QuizInfos);
         }
     }
 }

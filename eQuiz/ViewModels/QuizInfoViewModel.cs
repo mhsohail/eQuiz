@@ -8,7 +8,7 @@ namespace eQuiz.ViewModels
     public class QuizInfoViewModel
     {
         public string UserFullName { get; set; }
-        public int CorrectAnswers { get; set; }
+        public int CorrectAnswersCount { get; set; }
         public TimeSpan QuizTime { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace eQuiz.Models
         public string LastName { get; set; }
 
         public virtual ICollection<Question> SolvedQuestions { get; set; }
-        public virtual ICollection<QuestionUser> QuestionAppUsers { get; set; }
+        public virtual ICollection<QuestionUser> QuestionUsers { get; set; }
         
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
