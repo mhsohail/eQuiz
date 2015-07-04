@@ -26,7 +26,7 @@ namespace eQuiz.Controllers
         {
             var UserId = User.Identity.GetUserId();
             user = db.Users.Where(u => u.Id == UserId).SingleOrDefault();
-              
+            
             var UnsolvedQuestions = user.GetUnsolvedQuestions();
             if (UnsolvedQuestions.Count == 0)
             {

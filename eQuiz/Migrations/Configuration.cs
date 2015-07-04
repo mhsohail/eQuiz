@@ -140,7 +140,7 @@ namespace eQuiz.Migrations
                         var userManager = new UserManager<ApplicationUser>(userStore);
                         if (!(db.Users.Any(u => u.UserName == "sohailx2x@yahoo.com")))
                         {
-                            var userToInsert = new ApplicationUser { UserName = "sohailx2x@yahoo.com", Email = "sohailx2x@yahoo.com", PhoneNumber = "03035332033", LockoutEnabled = true };
+                            var userToInsert = new ApplicationUser { UserName = "sohailx2x@yahoo.com", Email = "sohailx2x@yahoo.com", PhoneNumber = "03035332033", LockoutEnabled = true, FirstName = "Muhammad", LastName = "Sohail" };
                             userManager.Create(userToInsert, "Sohail@2");
                         }
 
