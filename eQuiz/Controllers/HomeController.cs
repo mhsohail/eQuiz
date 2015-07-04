@@ -20,6 +20,7 @@ namespace eQuiz.Controllers
         {
             
         }
+
         [Authorize]
         public ActionResult Index()
         {
@@ -146,6 +147,15 @@ namespace eQuiz.Controllers
 
         public ActionResult DateTimePicker()
         {
+            return View();
+        }
+
+        [Authorize(Roles="Administrator")]
+        public ActionResult QuizInfo()
+        {
+            var UserId = User.Identity.GetUserId();
+            user = db.Users.Where(u => u.Id == UserId).SingleOrDefault();
+
             return View();
         }
     }

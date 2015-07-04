@@ -64,6 +64,14 @@ namespace eQuiz.Models
 
     public class RegisterViewModel
     {
+        [Required, RegularExpression("[A-Za-z]+", ErrorMessage="First Name should contain alphabetic letters only")]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Required, RegularExpression("[A-Za-z]+", ErrorMessage = "Last Name should contain alphabetic letters only")]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

@@ -1,0 +1,22 @@
+﻿@model IEnumerable<eQuiz.Models.QuestionUser>
+
+@{
+    ViewBag.Title = "QuizInfo";
+}
+
+<h2>QuizInfo</h2>
+<hr />
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <thead><tr><th>Name</th><th>Correct Answers</th><th>Shortest Time</th></tr></thead>
+            <tbody>
+                @foreach (var QuestionUser in Model)
+                {
+                    <tr><td></td><td>..</td><td>..</td></tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

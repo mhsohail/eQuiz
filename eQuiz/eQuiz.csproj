@@ -229,6 +229,10 @@
     <Compile Include="Migrations\201507041121434_QuestionUserFielNameChanged.Designer.cs">
       <DependentUpon>201507041121434_QuestionUserFielNameChanged.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201507041247239_ProfileNewFieldsAdded.cs" />
+    <Compile Include="Migrations\201507041247239_ProfileNewFieldsAdded.Designer.cs">
+      <DependentUpon>201507041247239_ProfileNewFieldsAdded.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Answer.cs" />
@@ -242,6 +246,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\QuestionViewModel.cs" />
+    <Compile Include="ViewModels\QuizInfoViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-datetimepicker.css" />
@@ -413,6 +418,7 @@
     <Content Include="Views\Tests\Edit.cshtml" />
     <Content Include="Views\Tests\Index.cshtml" />
     <Content Include="Views\Home\DateTimePicker.cshtml" />
+    <Content Include="Views\Home\QuizInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -466,6 +472,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201507041121434_QuestionUserFielNameChanged.resx">
       <DependentUpon>201507041121434_QuestionUserFielNameChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507041247239_ProfileNewFieldsAdded.resx">
+      <DependentUpon>201507041247239_ProfileNewFieldsAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
