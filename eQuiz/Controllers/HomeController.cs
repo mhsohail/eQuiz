@@ -169,9 +169,8 @@ namespace eQuiz.Controllers
                 QuizInfos.Add(qifv);
             }
 
-            QuizInfos = QuizInfos.OrderBy(qi => qi.QuizTime).ToList();
-
-            return View(QuizInfos);
+            var QuizInfosOrdered = QuizInfos.OrderByDescending(qi => qi.CorrectAnswersCount).ThenBy(qi => qi.QuizTime).ToList();
+            return View(QuizInfosOrdered);
         }
     }
 }
