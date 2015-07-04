@@ -197,6 +197,38 @@
     <Compile Include="Migrations\201506302231346_SettingModelFieldNamesChanged.Designer.cs">
       <DependentUpon>201506302231346_SettingModelFieldNamesChanged.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201507032356137_QuestionAppUsersTableCreated.cs" />
+    <Compile Include="Migrations\201507032356137_QuestionAppUsersTableCreated.Designer.cs">
+      <DependentUpon>201507032356137_QuestionAppUsersTableCreated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507040004090_FieldNameUpdated.cs" />
+    <Compile Include="Migrations\201507040004090_FieldNameUpdated.Designer.cs">
+      <DependentUpon>201507040004090_FieldNameUpdated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507040010066_QuestionAppUserModelNameChangedToQuestionUser.cs" />
+    <Compile Include="Migrations\201507040010066_QuestionAppUserModelNameChangedToQuestionUser.Designer.cs">
+      <DependentUpon>201507040010066_QuestionAppUserModelNameChangedToQuestionUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507040028546_QuestionUserFieldDataTypeModified.cs" />
+    <Compile Include="Migrations\201507040028546_QuestionUserFieldDataTypeModified.Designer.cs">
+      <DependentUpon>201507040028546_QuestionUserFieldDataTypeModified.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507040241125_QuestionUserFieldNamesAndTypesChanged.cs" />
+    <Compile Include="Migrations\201507040241125_QuestionUserFieldNamesAndTypesChanged.Designer.cs">
+      <DependentUpon>201507040241125_QuestionUserFieldNamesAndTypesChanged.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507040249053_QuestionUserColumnsOrderChanged.cs" />
+    <Compile Include="Migrations\201507040249053_QuestionUserColumnsOrderChanged.Designer.cs">
+      <DependentUpon>201507040249053_QuestionUserColumnsOrderChanged.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507041005447_IsSolvedFieldAddedToQuestionUsersModel.cs" />
+    <Compile Include="Migrations\201507041005447_IsSolvedFieldAddedToQuestionUsersModel.Designer.cs">
+      <DependentUpon>201507041005447_IsSolvedFieldAddedToQuestionUsersModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507041121434_QuestionUserFielNameChanged.cs" />
+    <Compile Include="Migrations\201507041121434_QuestionUserFielNameChanged.Designer.cs">
+      <DependentUpon>201507041121434_QuestionUserFielNameChanged.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Answer.cs" />
@@ -204,6 +236,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Question.cs" />
+    <Compile Include="Models\QuestionUser.cs" />
     <Compile Include="Models\Setting.cs" />
     <Compile Include="Models\Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -409,6 +442,30 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201506302231346_SettingModelFieldNamesChanged.resx">
       <DependentUpon>201506302231346_SettingModelFieldNamesChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507032356137_QuestionAppUsersTableCreated.resx">
+      <DependentUpon>201507032356137_QuestionAppUsersTableCreated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507040004090_FieldNameUpdated.resx">
+      <DependentUpon>201507040004090_FieldNameUpdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507040010066_QuestionAppUserModelNameChangedToQuestionUser.resx">
+      <DependentUpon>201507040010066_QuestionAppUserModelNameChangedToQuestionUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507040028546_QuestionUserFieldDataTypeModified.resx">
+      <DependentUpon>201507040028546_QuestionUserFieldDataTypeModified.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507040241125_QuestionUserFieldNamesAndTypesChanged.resx">
+      <DependentUpon>201507040241125_QuestionUserFieldNamesAndTypesChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507040249053_QuestionUserColumnsOrderChanged.resx">
+      <DependentUpon>201507040249053_QuestionUserColumnsOrderChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507041005447_IsSolvedFieldAddedToQuestionUsersModel.resx">
+      <DependentUpon>201507041005447_IsSolvedFieldAddedToQuestionUsersModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507041121434_QuestionUserFielNameChanged.resx">
+      <DependentUpon>201507041121434_QuestionUserFielNameChanged.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

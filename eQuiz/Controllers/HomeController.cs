@@ -60,18 +60,53 @@ namespace eQuiz.Controllers
         [Authorize]
         public ActionResult Result(QuestionViewModel SolvedQvm)
         {
-            var UserId = User.Identity.GetUserId();
-            user = db.Users.Where(u => u.Id == UserId).SingleOrDefault();
-            QuestionHelper.CheckQuestion(SolvedQvm, this, user, db);
-            
+            try
+            {
+                var UserId = User.Identity.GetUserId();
+                user = db.Users.Where(u => u.Id == UserId).SingleOrDefault();
+
+                if (SolvedQvm.Question != null)
+                {
+                    SolvedQvm.IsLastQuestion = true;
+                    QuestionHelper.CheckQuestion(SolvedQvm, this, user, db);
+                }
+                var CorrectAnswers = db.QuestionUsers.Where(qu => qu.ApplicationUserId.Equals(UserId) && qu.IsCorrect.Equals(true)).Count();
+
+                var QuizStartTime = db.QuestionUsers.OrderBy(qu => qu.StartTime).FirstOrDefault().StartTime;
+                var QuizEndTime = db.QuestionUsers.OrderByDescending(qu => qu.EndTime).FirstOrDefault().EndTime;
+
+                TimeSpan TimeSpan = QuizEndTime.Subtract(QuizStartTime);
+                Console.WriteLine("Time Difference (seconds): " + TimeSpan.Seconds);
+                Console.WriteLine("Time Difference (minutes): " + TimeSpan.Minutes);
+                Console.WriteLine("Time Difference (hours): " + TimeSpan.Hours);
+                Console.WriteLine("Time Difference (days): " + TimeSpan.Days);
+
+                ViewBag.TimeSpan = TimeSpan;
+                ViewBag.CorrectAnswers = CorrectAnswers;
+                ViewBag.TotalQuestions = db.Questions.ToList().Count;
+                ViewBag.TotalScore = GetScoreFromCookie();
+            }
+            catch (NullReferenceException exc)
+            {
+                ViewBag.TotalScore = GetScoreFromCookie();
+            }
+            catch (Exception exc)
+            {
+                ViewBag.TotalScore = GetScoreFromCookie();
+            }
+
+            return View();
+        }
+
+        private int GetScoreFromCookie()
+        {
             if (this.ControllerContext.HttpContext.Request.Cookies.AllKeys.Contains("TotalScore"))
             {
                 HttpCookie cookie = this.ControllerContext.HttpContext.Request.Cookies["TotalScore"];
                 //cookie.Expires = DateTime.Now.AddDays(-1); // remove the cookie
-                ViewBag.TotalScore = int.Parse(cookie.Value);
+                return int.Parse(cookie.Value);
             }
-
-            return View();
+            return 0;
         }
 
         public ActionResult Counter()

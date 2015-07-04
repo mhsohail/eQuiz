@@ -15,5 +15,6 @@ namespace eQuiz.Models
         
         public virtual List<Answer> Answers { get; set; }
         public virtual ICollection<ApplicationUser> Candidates { get; set; }
+        public virtual ICollection<QuestionUser> QuestionAppUsers { get; set; }
     }
 }

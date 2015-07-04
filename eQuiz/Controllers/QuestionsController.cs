@@ -35,6 +35,24 @@ namespace eQuiz.Controllers
             var UserId = User.Identity.GetUserId();
             var user = db.Users.Where(u => u.Id == UserId).SingleOrDefault();
 
+            try
+            {
+                var QuestionUser = db.QuestionUsers.SingleOrDefault(
+                    qu => qu.QuestionId.Equals(QuestionToSolve.QuestionId) &&
+                        qu.ApplicationUserId.Equals(user.Id));
+                if (QuestionUser == null)
+                {
+                    QuestionUser = new QuestionUser();
+                    QuestionUser.ApplicationUserId = user.Id;
+                    QuestionUser.QuestionId = QuestionToSolve.QuestionId;
+                    QuestionUser.StartTime = DateTime.Now;
+                    QuestionUser.EndTime = DateTime.Now;
+                    db.QuestionUsers.Add(QuestionUser);
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception exc) { }
+
             var UnsolvedQuestions = user.GetUnsolvedQuestions();
             if (UnsolvedQuestions.Count == 0)
             {

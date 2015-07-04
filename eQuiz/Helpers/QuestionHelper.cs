@@ -14,6 +14,16 @@ namespace eQuiz.Helpers
         {
             var QuestionToCheck = db.Questions.Where(q => q.QuestionId == SolvedQvm.Question.QuestionId).SingleOrDefault();
             var CorrectAnswer = QuestionToCheck.Answers.SingleOrDefault(a => a.IsCorrect);
+
+            var QuestionUser = db.QuestionUsers.SingleOrDefault(
+                    qu => qu.QuestionId.Equals(SolvedQvm.Question.QuestionId) &&
+                        qu.ApplicationUserId.Equals(user.Id));
+
+            if (SolvedQvm.IsLastQuestion)
+            {
+                QuestionUser.EndTime = DateTime.Now;
+            }
+
             if (SolvedQvm.SelectedAnswerId == CorrectAnswer.AnswerId)
             {
                 if (context.ControllerContext.HttpContext.Request.Cookies.AllKeys.Contains("TotalScore"))
@@ -31,14 +41,19 @@ namespace eQuiz.Helpers
                     cookie.Value = "1";
                     context.ControllerContext.HttpContext.Response.Cookies.Add(cookie);
                 }
+                QuestionUser.IsCorrect = true;
             }
             else
             {
                 // answer is incorrect
+                QuestionUser.IsCorrect = false;
             }
-
+            
             try
             {
+                QuestionUser.IsSolved = true;
+                db.SaveChanges();
+
                 user.SolvedQuestions.Add(QuestionToCheck);
                 db.Questions.Attach(QuestionToCheck);
                 db.SaveChanges();
