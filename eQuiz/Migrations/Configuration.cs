@@ -13,7 +13,7 @@ namespace eQuiz.Migrations
         eQuizContext db = new eQuizContext();
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
             ContextKey = "eQuiz.Models.eQuizContext";
             AutomaticMigrationDataLossAllowed = true;
         }
