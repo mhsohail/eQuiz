@@ -1,10 +1,10 @@
 ﻿
 @{
-    ViewBag.Title = "Solved";
+    ViewBag.Title = "Incorrect Sequence";
 }
 
 <div class="row">
-    <div class="col-md-12 text-center"><h2>Solved</h2></div>
+    <div class="col-md-12 text-center"><h2>Incorrect Question Sequence</h2></div>
 </div>
 <hr />
 <div class="row">
@@ -25,9 +25,8 @@
     if (typeof QuizSolved !== "undefined" && QuizSolved !== "" && QuizSolved !== null && QuizSolved === true) {
         document.getElementById("msg").innerHTML = "<p>You have already solved the quiz.</p>";
     } else {
-        alert(QuizSolved);
-        if (typeof QuestionId !== "undefined" && QuestionId !== "" && QuestionId !== null && QuestionId === true) {
-            document.getElementById("msg").innerHTML = "<p>You have already solved this question. Redirecting you to the next unsolved question.</p>";
+        if (typeof QuestionId !== "undefined" && QuestionId !== "" && QuestionId !== null) {
+            document.getElementById("msg").innerHTML = "<p>Incorrect question in sequence. Redirecting you to the next unsolved question.</p>";
             setTimeout(function () {
                 window.location = "/Questions/Details/" + QuestionId;
             }, 2000);
