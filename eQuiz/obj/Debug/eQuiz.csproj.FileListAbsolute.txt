@@ -125,6 +125,5 @@ C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.csproj.GenerateResource
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.dll
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.pdb
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.Migrations.QuestionUserFielNameChanged.resources
-C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.csprojResolveAssemblyReference.cache
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.Migrations.ProfileNewFieldsAdded.resources
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.Migrations.AutoCompensate.resources
