@@ -18,7 +18,7 @@ namespace eQuiz.Controllers
 
         public HomeController()
         {
-            
+            DbInitializer.Initialize();    
         }
 
         [Authorize]

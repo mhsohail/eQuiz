@@ -168,6 +168,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\DbInitializer.cs" />
     <Compile Include="Helpers\QuestionHelper.cs" />
     <Compile Include="Migrations\201506301217497_init.cs" />
     <Compile Include="Migrations\201506301217497_init.Designer.cs">
@@ -232,6 +233,10 @@
     <Compile Include="Migrations\201507041247239_ProfileNewFieldsAdded.cs" />
     <Compile Include="Migrations\201507041247239_ProfileNewFieldsAdded.Designer.cs">
       <DependentUpon>201507041247239_ProfileNewFieldsAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507051558575_AutoCompensate.cs" />
+    <Compile Include="Migrations\201507051558575_AutoCompensate.Designer.cs">
+      <DependentUpon>201507051558575_AutoCompensate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -347,6 +352,7 @@
     <Content Include="Content\bootstrap\alerts.less" />
     <Content Include="Content\less\bootstrap-datetimepicker-build.less" />
     <Content Include="Content\less\_bootstrap-datetimepicker.less" />
+    <None Include="Properties\PublishProfiles\eQuiz.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
@@ -475,6 +481,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201507041247239_ProfileNewFieldsAdded.resx">
       <DependentUpon>201507041247239_ProfileNewFieldsAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507051558575_AutoCompensate.resx">
+      <DependentUpon>201507051558575_AutoCompensate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
