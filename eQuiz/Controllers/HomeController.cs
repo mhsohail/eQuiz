@@ -149,24 +149,27 @@ namespace eQuiz.Controllers
         [Authorize(Roles="Administrator")]
         public ActionResult QuizInfo()
         {
-            var AppUsers = db.Users.ToList();
+            var AppUsers = db.Users.Where(u => u.QuestionUsers.Count > 0).ToList();
             var QuizInfos = new List<QuizInfoViewModel>();
 
             foreach (var AppUser in AppUsers)
             {
                 var QuestionUsers = AppUser.QuestionUsers.ToList();
                 QuizInfoViewModel qifv = new QuizInfoViewModel();
-                
-                var CorrectAnswersCount = QuestionUsers.Where(
-                    qu => qu.ApplicationUserId.Equals(AppUser.Id) &&
-                    qu.IsCorrect).Count();
 
-                var QuizStartTime = QuestionUsers.OrderBy(qu => qu.StartTime).FirstOrDefault().StartTime;
-                var QuizEndTime = QuestionUsers.OrderByDescending(qu => qu.EndTime).FirstOrDefault().EndTime;
-                qifv.QuizTime = QuizEndTime.Subtract(QuizStartTime);
-                qifv.UserFullName = AppUser.FirstName + " " + AppUser.LastName;
-                qifv.CorrectAnswersCount = CorrectAnswersCount;
-                QuizInfos.Add(qifv);
+                if (QuestionUsers.Count > 0)
+                {
+                    var CorrectAnswersCount = QuestionUsers.Where(
+                        qu => qu.ApplicationUserId.Equals(AppUser.Id) &&
+                        qu.IsCorrect).Count();
+
+                    var QuizStartTime = QuestionUsers.OrderBy(qu => qu.StartTime).FirstOrDefault().StartTime;
+                    var QuizEndTime = QuestionUsers.OrderByDescending(qu => qu.EndTime).FirstOrDefault().EndTime;
+                    qifv.QuizTime = QuizEndTime.Subtract(QuizStartTime);
+                    qifv.UserFullName = AppUser.FirstName + " " + AppUser.LastName;
+                    qifv.CorrectAnswersCount = CorrectAnswersCount;
+                    QuizInfos.Add(qifv);
+                }
             }
 
             var QuizInfosOrdered = QuizInfos.OrderByDescending(qi => qi.CorrectAnswersCount).ThenBy(qi => qi.QuizTime).ToList();

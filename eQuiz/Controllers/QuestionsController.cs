@@ -49,6 +49,10 @@ namespace eQuiz.Controllers
                     QuestionUser.EndTime = DateTime.Now;
                     db.QuestionUsers.Add(QuestionUser);
                     db.SaveChanges();
+                } else if (!QuestionUser.IsSolved)
+                {
+                    QuestionUser.StartTime = DateTime.Now;
+                    db.SaveChanges();
                 }
             }
             catch (Exception exc) { }
