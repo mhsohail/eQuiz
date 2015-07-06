@@ -61,6 +61,8 @@ namespace eQuiz.Controllers
         [Authorize]
         public ActionResult Result(QuestionViewModel SolvedQvm)
         {
+            ResultViewModel rvm = new ResultViewModel();
+
             try
             {
                 var UserId = User.Identity.GetUserId();
@@ -71,28 +73,28 @@ namespace eQuiz.Controllers
                     SolvedQvm.IsLastQuestion = true;
                     QuestionHelper.CheckQuestion(SolvedQvm, this, user, db);
                 }
-                var CorrectAnswers = db.QuestionUsers.Where(qu => qu.ApplicationUserId.Equals(UserId) && qu.IsCorrect.Equals(true)).Count();
+                var CorrectAnswersCount = db.QuestionUsers.Where(qu => qu.ApplicationUserId.Equals(UserId) && qu.IsCorrect.Equals(true)).Count();
 
                 var QuizStartTime = db.QuestionUsers.OrderBy(qu => qu.StartTime).FirstOrDefault().StartTime;
                 var QuizEndTime = db.QuestionUsers.OrderByDescending(qu => qu.EndTime).FirstOrDefault().EndTime;
 
                 TimeSpan TimeSpan = QuizEndTime.Subtract(QuizStartTime);
-                
-                ViewBag.TimeSpan = TimeSpan;
-                ViewBag.CorrectAnswers = CorrectAnswers;
-                ViewBag.TotalQuestions = db.Questions.ToList().Count;
-                ViewBag.TotalScore = GetScoreFromCookie();
+
+                rvm.QuizTime = TimeSpan;
+                rvm.CorrectAnswersCount = CorrectAnswersCount;
+                rvm.TotalQuestions = db.Questions.ToList().Count;
+                rvm.TotalScore = GetScoreFromCookie();
             }
             catch (NullReferenceException exc)
             {
-                ViewBag.TotalScore = GetScoreFromCookie();
+                rvm.TotalScore = GetScoreFromCookie();
             }
             catch (Exception exc)
             {
-                ViewBag.TotalScore = GetScoreFromCookie();
+                rvm.TotalScore = GetScoreFromCookie();
             }
 
-            return View();
+            return View(rvm);
         }
 
         private int GetScoreFromCookie()

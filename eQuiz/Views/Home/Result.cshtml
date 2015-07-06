@@ -1,4 +1,4 @@
-﻿
+﻿@model eQuiz.ViewModels.ResultViewModel
 @{
     ViewBag.Title = "Result";
 }
@@ -16,11 +16,11 @@
 </div>
 <div class="row">
     <div class="col-md-12 text-center">
-        <p>Total Correct Answers: @ViewBag.CorrectAnswers/@ViewBag.TotalQuestions</p>
+        <p>Total Correct Answers: @Model.CorrectAnswersCount/@Model.TotalQuestions</p>
     </div>
 </div>
 <div class="row">
     <div class="col-md-12 text-center">
-        <p>Total Time: @(((TimeSpan)ViewBag.TimeSpan).Hours):@(((TimeSpan)ViewBag.TimeSpan).Minutes):@(((TimeSpan)ViewBag.TimeSpan).Seconds)</p>
+        <p>Total Time: @Model.QuizTime.Hours:@Model.QuizTime.Minutes:@Model.QuizTime.Seconds</p>
     </div>
 </div>
