@@ -61,6 +61,13 @@ namespace eQuiz.Controllers
         [Authorize]
         public ActionResult Result(QuestionViewModel SolvedQvm)
         {
+            var QSTime = DateTime.Parse(db.Settings.SingleOrDefault(s => s.Name == "Quiz Start Time").Value);
+            var TimeDiff = QSTime.Subtract(DateTime.Now);
+            if (TimeDiff.TotalSeconds > 0)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             ResultViewModel rvm = new ResultViewModel();
 
             try
@@ -116,6 +123,13 @@ namespace eQuiz.Controllers
         [Authorize]
         public ActionResult Solved()
         {
+            var QSTime = DateTime.Parse(db.Settings.SingleOrDefault(s => s.Name == "Quiz Start Time").Value);
+            var TimeDiff = QSTime.Subtract(DateTime.Now);
+            if (TimeDiff.TotalSeconds > 0)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             return View();
         }
 

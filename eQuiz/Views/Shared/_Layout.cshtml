@@ -24,6 +24,10 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     @if (System.Web.HttpContext.Current.User.IsInRole("Administrator"))
                     {
+                        <li>@Html.ActionLink("Questions", "Index", "Questions")</li>
+                    }
+                    @if (System.Web.HttpContext.Current.User.IsInRole("Administrator"))
+                    {
                         <li>@Html.ActionLink("Settings", "Settings", "Home")</li> 
                     }
                     @if (System.Web.HttpContext.Current.User.IsInRole("Administrator"))

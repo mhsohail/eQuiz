@@ -14,8 +14,9 @@
         <div class="col-md-12">
             <div class="list-group">
                 <a href="#" class="list-group-item active">Questions</a>
-                @foreach (var item in Model) {
-                    <div class="list-group-item">
+                @foreach (var item in Model)
+                {
+                    <div class="list-group-item" style="background-color:lavender">
                         @item.Text
                         @Html.ActionLink("Edit", "Edit", new { id = item.QuestionId }) |
                         @Html.ActionLink("Details", "Details", new { id = item.QuestionId }) |
@@ -26,7 +27,7 @@
                             List group item heading
                         </h4>*@
                         <ul>
-                        @foreach(var Answer in item.Answers)
+                        @foreach (var Answer in item.Answers)
                         {
                             <li class="list-group-item-text" style="@((Answer.IsCorrect) ? "color:#41a040;font-weight:bold;" : string.Empty)">@Answer.Text</li>
                         }
