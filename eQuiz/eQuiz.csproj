@@ -238,6 +238,26 @@
     <Compile Include="Migrations\201507051558575_AutoCompensate.Designer.cs">
       <DependentUpon>201507051558575_AutoCompensate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201507121314136_MacAddressFieldAddedToUserProfile.cs" />
+    <Compile Include="Migrations\201507121314136_MacAddressFieldAddedToUserProfile.Designer.cs">
+      <DependentUpon>201507121314136_MacAddressFieldAddedToUserProfile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507121404150_MacAddressFieldUniqued.cs" />
+    <Compile Include="Migrations\201507121404150_MacAddressFieldUniqued.Designer.cs">
+      <DependentUpon>201507121404150_MacAddressFieldUniqued.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507130936579_IpAddressFieldAddedToUserProfile.cs" />
+    <Compile Include="Migrations\201507130936579_IpAddressFieldAddedToUserProfile.Designer.cs">
+      <DependentUpon>201507130936579_IpAddressFieldAddedToUserProfile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507130939364_IpAddressFieldUniqued.cs" />
+    <Compile Include="Migrations\201507130939364_IpAddressFieldUniqued.Designer.cs">
+      <DependentUpon>201507130939364_IpAddressFieldUniqued.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507131356421_MacAddress_IpAddress_Uniqueness_Removed.cs" />
+    <Compile Include="Migrations\201507131356421_MacAddress_IpAddress_Uniqueness_Removed.Designer.cs">
+      <DependentUpon>201507131356421_MacAddress_IpAddress_Uniqueness_Removed.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Answer.cs" />
@@ -376,7 +396,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -485,6 +507,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201507051558575_AutoCompensate.resx">
       <DependentUpon>201507051558575_AutoCompensate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507121314136_MacAddressFieldAddedToUserProfile.resx">
+      <DependentUpon>201507121314136_MacAddressFieldAddedToUserProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507121404150_MacAddressFieldUniqued.resx">
+      <DependentUpon>201507121404150_MacAddressFieldUniqued.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507130936579_IpAddressFieldAddedToUserProfile.resx">
+      <DependentUpon>201507130936579_IpAddressFieldAddedToUserProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507130939364_IpAddressFieldUniqued.resx">
+      <DependentUpon>201507130939364_IpAddressFieldUniqued.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507131356421_MacAddress_IpAddress_Uniqueness_Removed.resx">
+      <DependentUpon>201507131356421_MacAddress_IpAddress_Uniqueness_Removed.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -9,6 +9,12 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using eQuiz.Models;
+using System.Net.NetworkInformation;
+using System.Net;
+using System.Net.Sockets;
+using System.Text.RegularExpressions;
+using System.Web.Security;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace eQuiz.Controllers
 {
@@ -70,6 +76,44 @@ namespace eQuiz.Controllers
         {
             if (!ModelState.IsValid)
             {
+                return View(model);
+            }
+
+            ViewBag.LoginAllowed = true;
+
+            var user = await UserManager.FindAsync(model.Email, model.Password);
+            bool QuizStarted = false;
+            var QuizStartTime = DateTime.Parse(new eQuizContext().Settings.SingleOrDefault(s => s.Name == "Quiz Start Time").Value);
+            var TimeDiff = QuizStartTime.Subtract(DateTime.Now);
+            if (TimeDiff.TotalSeconds <= 0)
+            {
+                QuizStarted = true;
+            }
+            
+            var UserRequested = new eQuizContext().Users.SingleOrDefault(u => u.Email.Equals(model.Email));
+            var UserRole = UserRequested.Roles.FirstOrDefault();
+            
+            var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+            var AdminUsers = RoleManager.Roles.SingleOrDefault(r => r.Name.Equals("Administrator")).Users;
+
+            bool IsAdmin = false;
+            foreach (var AdminUser in AdminUsers)
+            {
+                if(UserRole == null)
+                {
+                    break;
+                }
+
+                if (AdminUser.UserId == UserRole.UserId)
+                {
+                    IsAdmin = true;
+                    break;
+                }
+            }
+
+            if(!IsAdmin && QuizStarted)
+            {
+                ViewBag.LoginAllowed = false;
                 return View(model);
             }
 
@@ -151,12 +195,30 @@ namespace eQuiz.Controllers
         {
             if (ModelState.IsValid)
             {
+                var NetInterfaces = NetworkInterface.GetAllNetworkInterfaces();
+                var ActiveNetInterfaces = NetInterfaces.Where(ni => ni.OperationalStatus == OperationalStatus.Up && ni.NetworkInterfaceType != NetworkInterfaceType.Loopback);
+                var SortedNetInterfaces = ActiveNetInterfaces.OrderByDescending(ni => ni.Speed);
+                var MacAddress = SortedNetInterfaces.First().GetPhysicalAddress().ToString();
+
+                // get host name (computer name)
+                String hostName = Dns.GetHostName();
+                string PublicIpAddress = string.Empty;
+
+                try
+                {
+                    PublicIpAddress = (new WebClient()).DownloadString("http://checkip.dyndns.org/");
+                    PublicIpAddress = (new Regex(@"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}")).Matches(PublicIpAddress)[0].ToString();
+                }
+                catch { }
+
                 var user = new ApplicationUser 
                 { 
                     UserName = model.Email, 
                     Email = model.Email, 
                     FirstName = model.FirstName,
-                    LastName = model.LastName
+                    LastName = model.LastName,
+                    MacAddress = MacAddress,
+                    IpAddress = PublicIpAddress
                 };
                 
                 var result = await UserManager.CreateAsync(user, model.Password);

@@ -169,6 +169,7 @@
             <div class="row" id="start-quiz">
                 @*@Html.ActionLink("Start Quiz", "Details", "Questions", new { id = ViewBag.FirstQuestionId }, new { @class = "btn btn-primary btn-lg" })*@
                 @Html.Hidden("FirstQuestionId", (int)ViewBag.FirstQuestionId, new { id = "FirstQuestionId", Name = "FirstQuestionId" })
+                <p>@ViewData["MacAddress"]</p>
             </div>
         </div>
     </div>

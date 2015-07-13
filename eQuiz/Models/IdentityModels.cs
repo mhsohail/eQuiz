@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace eQuiz.Models
 {
@@ -13,7 +14,15 @@ namespace eQuiz.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        
+        //[Index(IsUnique=true)]
+        //[MaxLength(450)]
+        public string MacAddress { get; set; }
 
+        //[Index(IsUnique = true)]
+        //[MaxLength(450)]
+        public string IpAddress { get; set; }
+        
         public virtual ICollection<Question> SolvedQuestions { get; set; }
         public virtual ICollection<QuestionUser> QuestionUsers { get; set; }
         

@@ -55,7 +55,6 @@ F:\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.dll
 F:\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.pdb
 F:\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.Migrations.initial.resources
 F:\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.csproj.GenerateResource.Cache
-C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\System.Web.Razor.dll
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\eQuiz.dll.config
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\eQuiz.dll
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\eQuiz.pdb
@@ -80,6 +79,7 @@ C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\Owin.dll
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\System.Web.Helpers.dll
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\System.Web.Mvc.dll
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\System.Web.Optimization.dll
+C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\System.Web.Razor.dll
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\System.Web.WebPages.Deployment.dll
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\System.Web.WebPages.dll
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\System.Web.WebPages.Razor.dll
@@ -121,10 +121,15 @@ C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.Migrations.QuestionUser
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.Migrations.QuestionUserFieldNamesAndTypesChanged.resources
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.Migrations.QuestionUserColumnsOrderChanged.resources
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.Migrations.IsSolvedFieldAddedToQuestionUsersModel.resources
-C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.csproj.GenerateResource.Cache
-C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.dll
-C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.pdb
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.Migrations.QuestionUserFielNameChanged.resources
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.Migrations.ProfileNewFieldsAdded.resources
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.Migrations.AutoCompensate.resources
+C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.csproj.GenerateResource.Cache
+C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.dll
+C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.pdb
+C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.Migrations.MacAddressFieldAddedToUserProfile.resources
+C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.Migrations.MacAddressFieldUniqued.resources
+C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.Migrations.IpAddressFieldAddedToUserProfile.resources
+C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.Migrations.IpAddressFieldUniqued.resources
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.csprojResolveAssemblyReference.cache
+C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.Migrations.MacAddress_IpAddress_Uniqueness_Removed.resources
