@@ -14,8 +14,12 @@ namespace eQuiz.Models
         [Key, Column(Order = 1)]
         public string ApplicationUserId { get; set; }
         [Column(Order = 2)]
+
+        // the time when questions is displayed to user
         public DateTime StartTime { get; set; }
         [Column(Order = 3)]
+        
+        // the time when user submits question after choosing answer
         public DateTime EndTime { get; set; }
         [Column(Order = 4)]
         public bool IsCorrect { get; set; }

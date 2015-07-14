@@ -42,6 +42,15 @@ namespace eQuiz.Controllers
             var UserId = User.Identity.GetUserId();
             var user = db.Users.Where(u => u.Id == UserId).SingleOrDefault();
 
+            if (user.QuizInfo == null)
+            {
+                QuizInfo QuizInfo = new QuizInfo();
+                QuizInfo.QuizStartDateTime = QuizStartTime;
+                QuizInfo.ApplicationUser = user;
+                db.QuizInfo.Add(QuizInfo);
+                db.SaveChanges();
+            }
+
             try
             {
                 var QuestionUser = db.QuestionUsers.SingleOrDefault(

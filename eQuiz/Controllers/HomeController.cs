@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using eQuiz.ViewModels;
 using eQuiz.Helpers;
+using System.Data.Entity;
 
 namespace eQuiz.Controllers
 {
@@ -79,10 +80,16 @@ namespace eQuiz.Controllers
                 {
                     SolvedQvm.IsLastQuestion = true;
                     QuestionHelper.CheckQuestion(SolvedQvm, this, user, db);
+                    
+                    var QuizInfo = user.QuizInfo;
+                    QuizInfo.HasCompletedQuiz = true;
+                    db.Entry(QuizInfo).State = EntityState.Modified;
+                    db.SaveChanges();
                 }
                 var CorrectAnswersCount = db.QuestionUsers.Where(qu => qu.ApplicationUserId.Equals(UserId) && qu.IsCorrect.Equals(true)).Count();
 
-                var QuizStartTime = db.QuestionUsers.OrderBy(qu => qu.StartTime).FirstOrDefault().StartTime;
+                //var QuizStartTime = db.QuestionUsers.OrderBy(qu => qu.StartTime).FirstOrDefault().StartTime;
+                var QuizStartTime = user.QuizInfo.QuizStartDateTime;
                 var QuizEndTime = db.QuestionUsers.OrderByDescending(qu => qu.EndTime).FirstOrDefault().EndTime;
 
                 TimeSpan TimeSpan = QuizEndTime.Subtract(QuizStartTime);
@@ -165,7 +172,7 @@ namespace eQuiz.Controllers
         [Authorize(Roles="Administrator")]
         public ActionResult QuizInfo()
         {
-            var AppUsers = db.Users.Where(u => u.QuestionUsers.Count > 0).ToList();
+            var AppUsers = db.Users.Where(u => u.QuizInfo != null).ToList();
             var QuizInfos = new List<QuizInfoViewModel>();
 
             foreach (var AppUser in AppUsers)
@@ -179,11 +186,15 @@ namespace eQuiz.Controllers
                         qu => qu.ApplicationUserId.Equals(AppUser.Id) &&
                         qu.IsCorrect).Count();
 
-                    var QuizStartTime = QuestionUsers.OrderBy(qu => qu.StartTime).FirstOrDefault().StartTime;
+                    //var QuizStartTime = QuestionUsers.OrderBy(qu => qu.StartTime).FirstOrDefault().StartTime;
+                    var QuizStartTime = AppUser.QuizInfo.QuizStartDateTime;
                     var QuizEndTime = QuestionUsers.OrderByDescending(qu => qu.EndTime).FirstOrDefault().EndTime;
                     qifv.QuizTime = QuizEndTime.Subtract(QuizStartTime);
                     qifv.UserFullName = AppUser.FirstName + " " + AppUser.LastName;
                     qifv.CorrectAnswersCount = CorrectAnswersCount;
+                    qifv.UserIpAddress = AppUser.IpAddress;
+                    qifv.UserMacAddress = AppUser.MacAddress;
+                    qifv.UserEmail = AppUser.Email;
                     QuizInfos.Add(qifv);
                 }
             }

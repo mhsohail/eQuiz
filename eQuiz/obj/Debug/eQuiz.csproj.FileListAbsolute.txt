@@ -133,3 +133,5 @@ C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.Migrations.IpAddressFie
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.Migrations.IpAddressFieldUniqued.resources
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.csprojResolveAssemblyReference.cache
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.Migrations.MacAddress_IpAddress_Uniqueness_Removed.resources
+C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.Migrations.QuizCompletedAndQuizStartDateTimeFieldsAdded.resources
+C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.Migrations.QuizInfoModelCreated.resources

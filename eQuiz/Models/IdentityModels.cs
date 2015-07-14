@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System;
 
 namespace eQuiz.Models
 {
@@ -25,6 +26,7 @@ namespace eQuiz.Models
         
         public virtual ICollection<Question> SolvedQuestions { get; set; }
         public virtual ICollection<QuestionUser> QuestionUsers { get; set; }
+        public virtual QuizInfo QuizInfo { get; set; }
         
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

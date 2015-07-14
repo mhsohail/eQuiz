@@ -258,6 +258,14 @@
     <Compile Include="Migrations\201507131356421_MacAddress_IpAddress_Uniqueness_Removed.Designer.cs">
       <DependentUpon>201507131356421_MacAddress_IpAddress_Uniqueness_Removed.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201507132200193_QuizCompletedAndQuizStartDateTimeFieldsAdded.cs" />
+    <Compile Include="Migrations\201507132200193_QuizCompletedAndQuizStartDateTimeFieldsAdded.Designer.cs">
+      <DependentUpon>201507132200193_QuizCompletedAndQuizStartDateTimeFieldsAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507132354403_QuizInfoModelCreated.cs" />
+    <Compile Include="Migrations\201507132354403_QuizInfoModelCreated.Designer.cs">
+      <DependentUpon>201507132354403_QuizInfoModelCreated.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Answer.cs" />
@@ -266,6 +274,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\QuestionUser.cs" />
+    <Compile Include="Models\QuizInfo.cs" />
     <Compile Include="Models\Setting.cs" />
     <Compile Include="Models\Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -522,6 +531,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201507131356421_MacAddress_IpAddress_Uniqueness_Removed.resx">
       <DependentUpon>201507131356421_MacAddress_IpAddress_Uniqueness_Removed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507132200193_QuizCompletedAndQuizStartDateTimeFieldsAdded.resx">
+      <DependentUpon>201507132200193_QuizCompletedAndQuizStartDateTimeFieldsAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507132354403_QuizInfoModelCreated.resx">
+      <DependentUpon>201507132354403_QuizInfoModelCreated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

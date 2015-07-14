@@ -183,6 +183,15 @@ namespace eQuiz.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            bool QuizStarted = false;
+            var QuizStartTime = DateTime.Parse(new eQuizContext().Settings.SingleOrDefault(s => s.Name == "Quiz Start Time").Value);
+            var TimeDiff = QuizStartTime.Subtract(DateTime.Now);
+            if (TimeDiff.TotalSeconds <= 0)
+            {
+                QuizStarted = true;
+            }
+            ViewBag.QuizStarted = QuizStarted;
+
             return View();
         }
 
