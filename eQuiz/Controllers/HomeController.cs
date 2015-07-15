@@ -73,6 +73,7 @@ namespace eQuiz.Controllers
                     SmtpClient mySmtpClient = new SmtpClient("smtp.gmail.com", 587);
                     // set smtp-client with basicAuthentication
                     mySmtpClient.UseDefaultCredentials = false;
+                    mySmtpClient.EnableSsl = true;
                     System.Net.NetworkCredential basicAuthenticationInfo = new
                         System.Net.NetworkCredential("sohailx2x@gmail.com", "kal07fag07nuf14");
                     mySmtpClient.Credentials = basicAuthenticationInfo;
