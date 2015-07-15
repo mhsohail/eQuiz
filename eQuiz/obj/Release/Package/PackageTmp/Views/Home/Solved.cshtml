@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Incorrect Sequence";
+}
+
+<div class="row">
+    <div class="col-md-12 text-center"><h2>Incorrect Question Sequence</h2></div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-12 text-center" id="msg"></div>
+</div>
+<script>
+
+    function getCookie(sKey) {
+        if (!sKey) { return null; }
+        //return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+        return document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + sKey.replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1") || null;
+        //Be aware that this method assumes that the key and value were encoded using encodeURIComponent(). Remove decode & encodeURIComponent() if the key and value of the cookie were not encoded.
+    }
+    
+    var QuestionId = Number(getCookie('QuestionId'));
+    var QuizSolved = Boolean(getCookie("QuizSolved"));
+    
+    if (typeof QuizSolved !== "undefined" && QuizSolved !== "" && QuizSolved !== null && QuizSolved === true) {
+        document.getElementById("msg").innerHTML = "<p>You have already solved the quiz.</p>";
+    } else {
+        if (typeof QuestionId !== "undefined" && QuestionId !== "" && QuestionId !== null) {
+            document.getElementById("msg").innerHTML = "<p>Incorrect question in sequence. Redirecting you to the next unsolved question.</p>";
+            setTimeout(function () {
+                window.location = "/Questions/Details/" + QuestionId;
+            }, 2000);
+        }
+    }
+</script>
