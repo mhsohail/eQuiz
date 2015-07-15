@@ -113,8 +113,11 @@ namespace eQuiz.Controllers
 
             if(!IsAdmin && QuizStarted)
             {
-                ViewBag.LoginAllowed = false;
-                return View(model);
+                if (user.QuizInfo == null || !user.QuizInfo.HasCompletedQuiz)
+                {
+                    ViewBag.LoginAllowed = false;
+                    return View(model);
+                }
             }
 
             // This doesn't count login failures towards account lockout

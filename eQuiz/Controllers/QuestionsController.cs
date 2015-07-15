@@ -29,6 +29,10 @@ namespace eQuiz.Controllers
         [Authorize]
         public ActionResult Details(int? id, QuestionViewModel SolvedQvm)
         {
+            var UserId = User.Identity.GetUserId();
+            var user = db.Users.Where(u => u.Id == UserId).SingleOrDefault();
+            if (user.QuizInfo != null && user.QuizInfo.HasCompletedQuiz) return RedirectToAction("Result", "Home");
+
             var QuizStartTime = DateTime.Parse(db.Settings.SingleOrDefault(s => s.Name == "Quiz Start Time").Value);
             var TimeDiff = QuizStartTime.Subtract(DateTime.Now);
             if (TimeDiff.TotalSeconds > 0)
@@ -39,8 +43,6 @@ namespace eQuiz.Controllers
             Question QuestionToSolve = db.Questions.SingleOrDefault(q => q.QuestionId == id);
             var UserMngr = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
             //var user = UserMngr.FindById(User.Identity.GetUserId());
-            var UserId = User.Identity.GetUserId();
-            var user = db.Users.Where(u => u.Id == UserId).SingleOrDefault();
 
             if (user.QuizInfo == null)
             {

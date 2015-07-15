@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using eQuiz.ViewModels;
 using eQuiz.Helpers;
 using System.Data.Entity;
+using System.Net.Mail;
 
 namespace eQuiz.Controllers
 {
@@ -52,11 +53,64 @@ namespace eQuiz.Controllers
             return View();
         }
 
+        // GET: Home/Contact
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        // POST: Home/Contact
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Contact(ContactUsViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    SmtpClient mySmtpClient = new SmtpClient("smtp.gmail.com", 587);
+                    // set smtp-client with basicAuthentication
+                    mySmtpClient.UseDefaultCredentials = false;
+                    System.Net.NetworkCredential basicAuthenticationInfo = new
+                        System.Net.NetworkCredential("sohailx2x@gmail.com", "kal07fag07nuf14");
+                    mySmtpClient.Credentials = basicAuthenticationInfo;
+
+                    // add from,to mailaddresses
+                    MailAddress from = new MailAddress("sohailx2x@yahoo.com", "Muhammad Sohail");
+                    MailAddress to = new MailAddress("sohailx2x@gmail.com", "Sohail KHan");
+                    MailMessage myMail = new System.Net.Mail.MailMessage(from, to);
+
+                    // add ReplyTo
+                    MailAddress replyto = new MailAddress("reply@example.com");
+                    myMail.ReplyTo = replyto;
+
+                    // set subject and encoding
+                    myMail.Subject = "Test message";
+                    myMail.SubjectEncoding = System.Text.Encoding.UTF8;
+
+                    // set body-message and encoding
+                    myMail.Body = "<b>Test Mail</b><br>using <b>HTML</b>.";
+                    myMail.BodyEncoding = System.Text.Encoding.UTF8;
+                    // text or html
+                    myMail.IsBodyHtml = true;
+
+                    mySmtpClient.Send(myMail);
+                }
+
+                catch (SmtpException ex)
+                {
+                    throw new ApplicationException
+                      ("SmtpException has occured: " + ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+
+            return View(model);
         }
 
         [Authorize]
