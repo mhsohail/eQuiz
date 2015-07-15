@@ -106,11 +106,13 @@ namespace eQuiz.Controllers
 
                     mySmtpClient.Send(myMail);
                     ViewBag.IsEmailSent = true;
+                    ViewBag.ViewMsg = "Email sent successfully";
                     ModelState.Clear();
                 }
                 catch (SmtpException ex)
                 {
                     ViewBag.IsEmailSent = false;
+                    ViewBag.ViewMsg = ex.Message;
                     return View(model);
 
                     throw new ApplicationException
@@ -119,8 +121,8 @@ namespace eQuiz.Controllers
                 catch (Exception ex)
                 {
                     ViewBag.IsEmailSent = false;
+                    ViewBag.ViewMsg = ex.Message;
                     return View(model);
-
 
                     throw ex;
                 }
