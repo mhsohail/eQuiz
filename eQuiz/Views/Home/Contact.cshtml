@@ -48,11 +48,11 @@
             <div class="col-md-offset-2 col-md-4">
                 @if (ViewBag.IsEmailSent != null && ViewBag.IsEmailSent)
                 {
-                    <p>Email sent successfully.</p>
+                    <p style="color:darkgreen">Email sent successfully.</p>
                 }
                 else if (ViewBag.IsEmailSent != null && !ViewBag.IsEmailSent)
                 {
-                    <p>Could not send email.</p>
+                    <p style="color:palevioletred">Could not send email.</p>
                 }
             </div>
         </div>

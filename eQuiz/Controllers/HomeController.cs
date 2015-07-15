@@ -106,6 +106,7 @@ namespace eQuiz.Controllers
 
                     mySmtpClient.Send(myMail);
                     ViewBag.IsEmailSent = true;
+                    ModelState.Clear();
                 }
                 catch (SmtpException ex)
                 {
