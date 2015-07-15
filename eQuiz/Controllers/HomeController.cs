@@ -83,27 +83,29 @@ namespace eQuiz.Controllers
                     mySmtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
 
                     // add from,to mailaddresses
-                    MailAddress from = new MailAddress("sohailx2x@yahoo.com", "Muhammad Sohail");
+                    MailAddress from = new MailAddress("sohailx2x@gmail.com", "Muhammad Sohail");
                     MailAddress to = new MailAddress("sohailx2x@gmail.com", "Sohail KHan");
                     MailMessage myMail = new MailMessage(from, to);
-
+                    
                     // add ReplyTo
                     //MailAddress replyto = new MailAddress("reply@example.com");
                     //myMail.ReplyTo = replyto;
 
                     // set subject and encoding
-                    myMail.Subject = "Test message";
+                    myMail.Subject = "Quiz Contact Us Message";
                     myMail.SubjectEncoding = System.Text.Encoding.UTF8;
 
                     // set body-message and encoding
-                    myMail.Body = "<b>Test Mail</b><br>using <b>HTML</b>.";
+                    myMail.Body = "<p><b>From</b>: " + model.FirstName +  " " + model.LastName + "</p>";
+                    myMail.Body += "<p><b>Email</b>: " + model.Email + "</p>";
+                    myMail.Body += "<p>" + model.Comments + "</p>";
                     myMail.BodyEncoding = System.Text.Encoding.UTF8;
+                    
                     // text or html
                     myMail.IsBodyHtml = true;
 
                     mySmtpClient.Send(myMail);
                 }
-
                 catch (SmtpException ex)
                 {
                     throw new ApplicationException
