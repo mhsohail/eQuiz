@@ -80,6 +80,7 @@ namespace eQuiz.Controllers
                             "kal07fag07nuf14"
                         );
                     mySmtpClient.Credentials = basicAuthenticationInfo;
+                    mySmtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
 
                     // add from,to mailaddresses
                     MailAddress from = new MailAddress("sohailx2x@yahoo.com", "Muhammad Sohail");
