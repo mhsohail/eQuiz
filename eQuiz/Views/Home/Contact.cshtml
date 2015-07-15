@@ -45,6 +45,19 @@
         </div>
 
         <div class="form-group">
+            <div class="col-md-offset-2 col-md-4">
+                @if (ViewBag.IsEmailSent != null && ViewBag.IsEmailSent)
+                {
+                    <p>Email sent successfully.</p>
+                }
+                else if (ViewBag.IsEmailSent != null && !ViewBag.IsEmailSent)
+                {
+                    <p>Could not send email.</p>
+                }
+            </div>
+        </div>
+        
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Send" class="btn btn-default" />
             </div>

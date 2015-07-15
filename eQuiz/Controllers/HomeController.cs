@@ -105,14 +105,22 @@ namespace eQuiz.Controllers
                     myMail.IsBodyHtml = true;
 
                     mySmtpClient.Send(myMail);
+                    ViewBag.IsEmailSent = true;
                 }
                 catch (SmtpException ex)
                 {
+                    ViewBag.IsEmailSent = false;
+                    return View(model);
+
                     throw new ApplicationException
                       ("SmtpException has occured: " + ex.Message);
                 }
                 catch (Exception ex)
                 {
+                    ViewBag.IsEmailSent = false;
+                    return View(model);
+
+
                     throw ex;
                 }
             }
