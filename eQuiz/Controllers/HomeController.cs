@@ -10,6 +10,7 @@ using eQuiz.ViewModels;
 using eQuiz.Helpers;
 using System.Data.Entity;
 using System.Net.Mail;
+using System.Net;
 
 namespace eQuiz.Controllers
 {
@@ -74,18 +75,20 @@ namespace eQuiz.Controllers
                     // set smtp-client with basicAuthentication
                     mySmtpClient.UseDefaultCredentials = false;
                     mySmtpClient.EnableSsl = true;
-                    System.Net.NetworkCredential basicAuthenticationInfo = new
-                        System.Net.NetworkCredential("sohailx2x@gmail.com", "kal07fag07nuf14");
+                    NetworkCredential basicAuthenticationInfo = new NetworkCredential (
+                            "sohailx2x@gmail.com",
+                            "kal07fag07nuf14"
+                        );
                     mySmtpClient.Credentials = basicAuthenticationInfo;
 
                     // add from,to mailaddresses
                     MailAddress from = new MailAddress("sohailx2x@yahoo.com", "Muhammad Sohail");
                     MailAddress to = new MailAddress("sohailx2x@gmail.com", "Sohail KHan");
-                    MailMessage myMail = new System.Net.Mail.MailMessage(from, to);
+                    MailMessage myMail = new MailMessage(from, to);
 
                     // add ReplyTo
-                    MailAddress replyto = new MailAddress("reply@example.com");
-                    myMail.ReplyTo = replyto;
+                    //MailAddress replyto = new MailAddress("reply@example.com");
+                    //myMail.ReplyTo = replyto;
 
                     // set subject and encoding
                     myMail.Subject = "Test message";
