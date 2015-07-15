@@ -115,27 +115,51 @@ namespace eQuiz.Helpers
                         db.Answers.Add(q3a4);
 
                         db.SaveChanges();
-
-                        //this is for creating user
-                        var userStore = new UserStore<ApplicationUser>(db);
-                        var userManager = new UserManager<ApplicationUser>(userStore);
-                        if (!(db.Users.Any(u => u.UserName == "sohailx2x@yahoo.com")))
-                        {
-                            var userToInsert = new ApplicationUser { UserName = "sohailx2x@yahoo.com", Email = "sohailx2x@yahoo.com", PhoneNumber = "03035332033", LockoutEnabled = true, FirstName = "Muhammad", LastName = "Sohail" };
-                            userManager.Create(userToInsert, "Sohail@2");
-                        }
-
-                        //this is for creating role
-                        RoleManager<IdentityRole> RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
-                        var role = new IdentityRole("Administrator");
-                        RoleManager.Create(role);
-
-                        //this is for assigning role that is created above
-                        ApplicationUser user = userManager.FindByNameAsync("sohailx2x@yahoo.com").Result;
-                        userManager.AddToRole(user.Id, role.Name);
-
-                        Transaction.Commit();
                     }
+
+                    //this is for creating user
+                    var userStore = new UserStore<ApplicationUser>(db);
+                    var userManager = new UserManager<ApplicationUser>(userStore);
+
+                    if (!(db.Users.Any(u => u.UserName == "sohailx2x@yahoo.com")))
+                    {
+                        var userToInsert = new ApplicationUser { UserName = "sohailx2x@yahoo.com", Email = "sohailx2x@yahoo.com", PhoneNumber = "03035332033", LockoutEnabled = true, FirstName = "Muhammad", LastName = "Sohail" };
+                        userManager.Create(userToInsert, "Sohail@2");
+                    }
+
+                    if (!(db.Users.Any(u => u.UserName == "melvinlclaxton@gmail.com")))
+                    {
+                        var userToInsert = new ApplicationUser { UserName = "melvinlclaxton@gmail.com", Email = "melvinlclaxton@gmail.com", PhoneNumber = "03035332033", LockoutEnabled = true, FirstName = "Muhammad", LastName = "Sohail" };
+                        userManager.Create(userToInsert, "123456");
+                    }
+
+                    //this is for creating/getting role
+                    RoleManager<IdentityRole> RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(db));
+                    var role = new IdentityRole("Administrator");
+                    if (!RoleManager.RoleExists("Administrator"))
+                    {
+                        RoleManager.Create(role);
+                    }
+                    else
+                    {
+                        role = RoleManager.FindByName("Administrator");
+                    }
+
+                    //this is for assigning role that is created above
+                    ApplicationUser user = userManager.FindByNameAsync("sohailx2x@yahoo.com").Result;
+                    if(!userManager.IsInRole(user.Id, role.Id))
+                    {
+                        userManager.AddToRole(user.Id, role.Name);
+                    }
+
+                    //this is for assigning role that is created above
+                    user = userManager.FindByNameAsync("melvinlclaxton@gmail.com").Result;
+                    if (!userManager.IsInRole(user.Id, role.Id))
+                    {
+                        userManager.AddToRole(user.Id, role.Name);
+                    }
+                    
+                    Transaction.Commit();
                 }
                 catch(Exception exc)
                 {
