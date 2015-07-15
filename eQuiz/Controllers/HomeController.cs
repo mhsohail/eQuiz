@@ -75,7 +75,7 @@ namespace eQuiz.Controllers
                     // set smtp-client with basicAuthentication
                     mySmtpClient.UseDefaultCredentials = false;
                     mySmtpClient.EnableSsl = true;
-                    NetworkCredential basicAuthenticationInfo = new NetworkCredential (
+                    NetworkCredential basicAuthenticationInfo = new NetworkCredential(
                             "sohailx2x@gmail.com",
                             "kal07fag07nuf14"
                         );
@@ -86,7 +86,7 @@ namespace eQuiz.Controllers
                     MailAddress from = new MailAddress("sohailx2x@gmail.com", "Muhammad Sohail");
                     MailAddress to = new MailAddress("sohailx2x@gmail.com", "Sohail KHan");
                     MailMessage myMail = new MailMessage(from, to);
-                    
+
                     // add ReplyTo
                     //MailAddress replyto = new MailAddress("reply@example.com");
                     //myMail.ReplyTo = replyto;
@@ -96,18 +96,18 @@ namespace eQuiz.Controllers
                     myMail.SubjectEncoding = System.Text.Encoding.UTF8;
 
                     // set body-message and encoding
-                    myMail.Body = "<p><b>From</b>: " + model.FirstName +  " " + model.LastName + "</p>";
+                    myMail.Body = "<p><b>From</b>: " + model.FirstName + " " + model.LastName + "</p>";
                     myMail.Body += "<p><b>Email</b>: " + model.Email + "</p>";
                     myMail.Body += "<p>" + model.Comments + "</p>";
                     myMail.BodyEncoding = System.Text.Encoding.UTF8;
-                    
+
                     // text or html
                     myMail.IsBodyHtml = true;
 
                     mySmtpClient.Send(myMail);
                     ViewBag.IsEmailSent = true;
                     ViewBag.ViewMsg = "Email sent successfully";
-                    ModelState.Clear();
+                    return View();
                 }
                 catch (SmtpException ex)
                 {
@@ -127,8 +127,10 @@ namespace eQuiz.Controllers
                     throw ex;
                 }
             }
-
-            return View(model);
+            else
+            {
+                return View(model);
+            }
         }
 
         [Authorize]
