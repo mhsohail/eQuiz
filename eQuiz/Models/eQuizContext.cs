@@ -19,6 +19,7 @@ namespace eQuiz.Models
         public DbSet<Setting> Settings { get; set; }
         public DbSet<QuestionUser> QuestionUsers { get; set; }
         public DbSet<QuizInfo> QuizInfo { get; set; }
+        public DbSet<IdentityUserLogin> UserLogins { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -19,7 +19,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/27/2015 02:25:26</publishTime>
     </File>
     <File Include="bin/eQuiz.dll">
-      <publishTime>07/07/2015 22:28:45</publishTime>
+      <publishTime>07/15/2015 22:30:21</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Identity.Core.dll">
       <publishTime>06/26/2015 23:13:04</publishTime>
@@ -463,10 +463,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 23:12:08</publishTime>
     </File>
     <File Include="Views/Account/Login.cshtml">
-      <publishTime>06/26/2015 23:12:08</publishTime>
+      <publishTime>07/14/2015 02:15:00</publishTime>
     </File>
     <File Include="Views/Account/Register.cshtml">
-      <publishTime>07/04/2015 18:13:44</publishTime>
+      <publishTime>07/14/2015 03:29:23</publishTime>
     </File>
     <File Include="Views/Account/ResetPassword.cshtml">
       <publishTime>06/26/2015 23:12:09</publishTime>
@@ -484,10 +484,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 23:12:07</publishTime>
     </File>
     <File Include="Views/Home/About.cshtml">
-      <publishTime>06/26/2015 23:09:03</publishTime>
+      <publishTime>07/15/2015 17:43:45</publishTime>
     </File>
     <File Include="Views/Home/Contact.cshtml">
-      <publishTime>06/26/2015 23:09:03</publishTime>
+      <publishTime>07/15/2015 21:06:33</publishTime>
     </File>
     <File Include="Views/Home/Counter.cshtml">
       <publishTime>06/30/2015 01:00:26</publishTime>
@@ -496,13 +496,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/03/2015 16:54:25</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>07/07/2015 21:37:54</publishTime>
+      <publishTime>07/12/2015 17:25:55</publishTime>
     </File>
     <File Include="Views/Home/QuizInfo.cshtml">
-      <publishTime>07/04/2015 21:14:25</publishTime>
+      <publishTime>07/14/2015 05:34:00</publishTime>
     </File>
     <File Include="Views/Home/Result.cshtml">
-      <publishTime>07/06/2015 18:07:56</publishTime>
+      <publishTime>07/14/2015 02:56:46</publishTime>
     </File>
     <File Include="Views/Home/Settings.cshtml">
       <publishTime>07/06/2015 20:19:11</publishTime>
@@ -517,7 +517,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 23:12:09</publishTime>
     </File>
     <File Include="Views/Manage/Index.cshtml">
-      <publishTime>06/26/2015 23:12:09</publishTime>
+      <publishTime>07/15/2015 19:22:48</publishTime>
     </File>
     <File Include="Views/Manage/ManageLogins.cshtml">
       <publishTime>06/26/2015 23:12:09</publishTime>
@@ -529,7 +529,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 23:12:10</publishTime>
     </File>
     <File Include="Views/Questions/Create.cshtml">
-      <publishTime>06/28/2015 03:35:14</publishTime>
+      <publishTime>07/15/2015 16:09:17</publishTime>
     </File>
     <File Include="Views/Questions/Delete.cshtml">
       <publishTime>06/27/2015 17:26:06</publishTime>
@@ -577,7 +577,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/26/2015 23:09:03</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/07/2015 22:28:48</publishTime>
+      <publishTime>07/15/2015 22:30:29</publishTime>
     </File>
   </ItemGroup>
 </Project>
