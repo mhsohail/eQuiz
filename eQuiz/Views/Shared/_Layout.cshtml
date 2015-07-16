@@ -35,6 +35,11 @@
                     {
                         <li>@Html.ActionLink("Quiz Info", "QuizInfo", "Home")</li>
                     }
+                    @if (System.Web.HttpContext.Current.User.IsInRole("Administrator"))
+                    {
+                        <li>@Html.ActionLink("Members", "Index", "UsersAdmin")</li>
+                    }
+                    
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
