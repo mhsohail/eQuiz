@@ -40,7 +40,7 @@ namespace eQuiz.Controllers
             // Demonstrate ToLocalTime and ToUniversalTime.
             DateTime local = zone.ToLocalTime(DateTime.Now);
             DateTime universal = zone.ToUniversalTime(DateTime.Now);
-            return local + " - " + universal + " - " + DateTime.UtcNow;
+            return local + " - " + universal + " - " + DateTime.UtcNow.ToLocalTime();
             //if (TimeDiff.TotalSeconds > 0)
             //{
             //    return RedirectToAction("Index", "Home");
