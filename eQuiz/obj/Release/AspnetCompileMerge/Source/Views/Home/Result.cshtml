@@ -1,0 +1,26 @@
+﻿@model eQuiz.ViewModels.ResultViewModel
+@{
+    ViewBag.Title = "Result";
+}
+
+<div class="row">
+    <div class="col-md-12 text-center">
+        <h1>Congratulations</h1>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-12 text-center">
+        <h2>You’ve completed the Great Bible Race Guinness World Record Quiz</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 text-center">
+        <p>Total Correct Answers: @Model.CorrectAnswersCount/@Model.TotalQuestions</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 text-center">
+        <p>Total Time: @Model.QuizTime.Hours Hours : @Model.QuizTime.Minutes Minutes : @Model.QuizTime.Seconds Seconds</p>
+    </div>
+</div>

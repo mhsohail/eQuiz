@@ -78,3 +78,14 @@ C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Release\eQuiz.Migrations.IpAddressF
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Release\eQuiz.Migrations.MacAddress_IpAddress_Uniqueness_Removed.resources
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Release\eQuiz.Migrations.QuizCompletedAndQuizStartDateTimeFieldsAdded.resources
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Release\eQuiz.Migrations.QuizInfoModelCreated.resources
+C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\DataAnnotationsExtensions.ClientValidation.dll
+C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\DataAnnotationsExtensions.dll
+C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\Mvc.Mailer.dll
+C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\MvcMembership.dll
+C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\PagedList.dll
+C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\PagedList.Mvc.dll
+C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\WebActivator.dll
+C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\MvcMembership.pdb
+C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\MvcMembership.xml
+C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\PagedList.xml
+C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\PagedList.Mvc.xml
