@@ -40,7 +40,12 @@ namespace eQuiz.Controllers
             // Demonstrate ToLocalTime and ToUniversalTime.
             DateTime local = zone.ToLocalTime(DateTime.Now);
             DateTime universal = zone.ToUniversalTime(DateTime.Now);
-            return local + " - " + universal + " - " + DateTime.UtcNow.ToLocalTime();
+            //return local + " - " + universal + " - " + DateTime.UtcNow.ToLocalTime();
+            string nzTimeZoneKey = "Pakistan Standard Time";
+            TimeZoneInfo nzTimeZone = TimeZoneInfo.FindSystemTimeZoneById(nzTimeZoneKey);
+            DateTime nzDateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, nzTimeZone);
+            return nzDateTime + "";
+            //TimeZone.CurrentTimeZone.ToLocalTime()
             //if (TimeDiff.TotalSeconds > 0)
             //{
             //    return RedirectToAction("Index", "Home");
