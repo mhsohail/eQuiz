@@ -34,17 +34,15 @@ namespace eQuiz.Controllers
             //if (user.QuizInfo != null && user.QuizInfo.HasCompletedQuiz) return RedirectToAction("Result", "Home");
 
             var QuizStartTime = DateTime.Parse(db.Settings.SingleOrDefault(s => s.Name == "Quiz Start Time").Value);
-            var TimeDiff = QuizStartTime.Subtract(DateTime.Now.ToLocalTime());
-            //return QuizStartTime + " - " + DateTime.Now.ToLocalTime() + " - " + TimeDiff;
-            TimeZone zone = TimeZone.CurrentTimeZone;
-            // Demonstrate ToLocalTime and ToUniversalTime. 
-            DateTime local = zone.ToLocalTime(DateTime.Now);
-            DateTime universal = zone.ToUniversalTime(DateTime.Now);
+            
+            string EasternStandardTimeId = "Eastern Standard Time";
+            TimeZoneInfo ESTTimeZone = TimeZoneInfo.FindSystemTimeZoneById(EasternStandardTimeId);
+            DateTime ESTDateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, ESTTimeZone);
+            var TimeDiff = QuizStartTime.Subtract(ESTDateTime);
+            
+            return QuizStartTime + " - " + DateTime.Now.ToLocalTime() + " - " + TimeDiff;
             //return local + " - " + universal + " - " + DateTime.UtcNow.ToLocalTime();
-            string nzTimeZoneKey = "Eastern Standard Time";
-            TimeZoneInfo nzTimeZone = TimeZoneInfo.FindSystemTimeZoneById(nzTimeZoneKey);
-            DateTime nzDateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, nzTimeZone);
-            return nzDateTime + "";
+            
             //TimeZone.CurrentTimeZone.ToLocalTime()
             //if (TimeDiff.TotalSeconds > 0)
             //{
