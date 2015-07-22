@@ -27,123 +27,124 @@ namespace eQuiz.Controllers
 
         // GET: Questions/Details/5
         [Authorize]
-        public ActionResult Details(int? id, QuestionViewModel SolvedQvm)
+        public string Details(int? id, QuestionViewModel SolvedQvm)
         {
             var UserId = User.Identity.GetUserId();
             var user = db.Users.Where(u => u.Id == UserId).SingleOrDefault();
-            if (user.QuizInfo != null && user.QuizInfo.HasCompletedQuiz) return RedirectToAction("Result", "Home");
+            //if (user.QuizInfo != null && user.QuizInfo.HasCompletedQuiz) return RedirectToAction("Result", "Home");
 
             var QuizStartTime = DateTime.Parse(db.Settings.SingleOrDefault(s => s.Name == "Quiz Start Time").Value);
-            var TimeDiff = QuizStartTime.Subtract(DateTime.Now);
-            if (TimeDiff.TotalSeconds > 0)
-            {
-                return RedirectToAction("Index", "Home");
-            }
+            var TimeDiff = QuizStartTime.Subtract(DateTime.Now.ToLocalTime());
+            return QuizStartTime + " - " + DateTime.Now.ToLocalTime() + " - " + TimeDiff;
+            //if (TimeDiff.TotalSeconds > 0)
+            //{
+            //    return RedirectToAction("Index", "Home");
+            //}
             
-            Question QuestionToSolve = db.Questions.SingleOrDefault(q => q.QuestionId == id);
-            var UserMngr = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
-            //var user = UserMngr.FindById(User.Identity.GetUserId());
+            //Question QuestionToSolve = db.Questions.SingleOrDefault(q => q.QuestionId == id);
+            //var UserMngr = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            ////var user = UserMngr.FindById(User.Identity.GetUserId());
 
-            if (user.QuizInfo == null)
-            {
-                QuizInfo QuizInfo = new QuizInfo();
-                QuizInfo.QuizStartDateTime = QuizStartTime;
-                QuizInfo.ApplicationUser = user;
-                db.QuizInfo.Add(QuizInfo);
-                db.SaveChanges();
-            }
+            //if (user.QuizInfo == null)
+            //{
+            //    QuizInfo QuizInfo = new QuizInfo();
+            //    QuizInfo.QuizStartDateTime = QuizStartTime;
+            //    QuizInfo.ApplicationUser = user;
+            //    db.QuizInfo.Add(QuizInfo);
+            //    db.SaveChanges();
+            //}
 
-            try
-            {
-                var QuestionUser = db.QuestionUsers.SingleOrDefault(
-                    qu => qu.QuestionId.Equals(QuestionToSolve.QuestionId) &&
-                        qu.ApplicationUserId.Equals(user.Id));
-                if (QuestionUser == null)
-                {
-                    QuestionUser = new QuestionUser();
-                    QuestionUser.ApplicationUserId = user.Id;
-                    QuestionUser.QuestionId = QuestionToSolve.QuestionId;
-                    QuestionUser.StartTime = DateTime.Now;
-                    QuestionUser.EndTime = DateTime.Now;
-                    db.QuestionUsers.Add(QuestionUser);
-                    db.SaveChanges();
-                } else if (!QuestionUser.IsSolved)
-                {
-                    QuestionUser.StartTime = DateTime.Now;
-                    db.SaveChanges();
-                }
-            }
-            catch (Exception exc) { }
+            //try
+            //{
+            //    var QuestionUser = db.QuestionUsers.SingleOrDefault(
+            //        qu => qu.QuestionId.Equals(QuestionToSolve.QuestionId) &&
+            //            qu.ApplicationUserId.Equals(user.Id));
+            //    if (QuestionUser == null)
+            //    {
+            //        QuestionUser = new QuestionUser();
+            //        QuestionUser.ApplicationUserId = user.Id;
+            //        QuestionUser.QuestionId = QuestionToSolve.QuestionId;
+            //        QuestionUser.StartTime = DateTime.Now;
+            //        QuestionUser.EndTime = DateTime.Now;
+            //        db.QuestionUsers.Add(QuestionUser);
+            //        db.SaveChanges();
+            //    } else if (!QuestionUser.IsSolved)
+            //    {
+            //        QuestionUser.StartTime = DateTime.Now;
+            //        db.SaveChanges();
+            //    }
+            //}
+            //catch (Exception exc) { }
 
-            var UnsolvedQuestions = user.GetUnsolvedQuestions();
-            if (UnsolvedQuestions.Count == 0)
-            {
-                HttpCookie cookie = new HttpCookie("QuizSolved", true.ToString());
-                Response.Cookies.Add(cookie);
-                return RedirectToAction("Solved", "Home");
-            }
+            //var UnsolvedQuestions = user.GetUnsolvedQuestions();
+            //if (UnsolvedQuestions.Count == 0)
+            //{
+            //    HttpCookie cookie = new HttpCookie("QuizSolved", true.ToString());
+            //    Response.Cookies.Add(cookie);
+            //    return RedirectToAction("Solved", "Home");
+            //}
 
-            if (user.HasSolvedQuestion(QuestionToSolve))
-            {
-                // redirect to next unsolved question
-                var QuestionsInDb = db.Questions.OrderBy(q => q.QuestionId);
-                foreach (Question Question in QuestionsInDb)
-                {
-                    if (!user.HasSolvedQuestion(Question))
-                    {
-                        HttpCookie cookie = new HttpCookie("QuestionId", Question.QuestionId.ToString());
-                        Response.Cookies.Add(cookie);
-                        return RedirectToAction("Solved", "Home");
-                    }
-                }
-            }
+            //if (user.HasSolvedQuestion(QuestionToSolve))
+            //{
+            //    // redirect to next unsolved question
+            //    var QuestionsInDb = db.Questions.OrderBy(q => q.QuestionId);
+            //    foreach (Question Question in QuestionsInDb)
+            //    {
+            //        if (!user.HasSolvedQuestion(Question))
+            //        {
+            //            HttpCookie cookie = new HttpCookie("QuestionId", Question.QuestionId.ToString());
+            //            Response.Cookies.Add(cookie);
+            //            return RedirectToAction("Solved", "Home");
+            //        }
+            //    }
+            //}
 
-            if (SolvedQvm != null && SolvedQvm.SelectedAnswerId != 0)
-            {
-                QuestionHelper.CheckQuestion(SolvedQvm, this, user, db);
-            }
+            //if (SolvedQvm != null && SolvedQvm.SelectedAnswerId != 0)
+            //{
+            //    QuestionHelper.CheckQuestion(SolvedQvm, this, user, db);
+            //}
 
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
 
-            if (user.IsAheadOfNextUnsolvedQuestion(QuestionToSolve))
-            {
-                // redirect to next unsolved question
-                var QuestionsInDb = db.Questions.OrderBy(q => q.QuestionId);
-                foreach (Question Question in QuestionsInDb)
-                {
-                    if (!user.HasSolvedQuestion(Question))
-                    {
-                        HttpCookie cookie = new HttpCookie("QuestionId", Question.QuestionId.ToString());
-                        Response.Cookies.Add(cookie);
-                        return RedirectToAction("Solved", "Home");
-                    }
-                }
-            }
+            //if (user.IsAheadOfNextUnsolvedQuestion(QuestionToSolve))
+            //{
+            //    // redirect to next unsolved question
+            //    var QuestionsInDb = db.Questions.OrderBy(q => q.QuestionId);
+            //    foreach (Question Question in QuestionsInDb)
+            //    {
+            //        if (!user.HasSolvedQuestion(Question))
+            //        {
+            //            HttpCookie cookie = new HttpCookie("QuestionId", Question.QuestionId.ToString());
+            //            Response.Cookies.Add(cookie);
+            //            return RedirectToAction("Solved", "Home");
+            //        }
+            //    }
+            //}
 
-            List<Answer> Answers = QuestionToSolve.Answers;
-            var qvm = new QuestionViewModel();
-            qvm.Question = QuestionToSolve;
-            qvm.Answers = Answers;
-            var NextQuestion = db.Questions.OrderBy(q => q.QuestionId).FirstOrDefault(q => q.QuestionId > id);
-            if (NextQuestion != null)
-            {
-                qvm.NextId = NextQuestion.QuestionId;
-                qvm.IsLastQuestion = false;
-            }
-            else
-            {
-                qvm.IsLastQuestion = true;
-            }
+            //List<Answer> Answers = QuestionToSolve.Answers;
+            //var qvm = new QuestionViewModel();
+            //qvm.Question = QuestionToSolve;
+            //qvm.Answers = Answers;
+            //var NextQuestion = db.Questions.OrderBy(q => q.QuestionId).FirstOrDefault(q => q.QuestionId > id);
+            //if (NextQuestion != null)
+            //{
+            //    qvm.NextId = NextQuestion.QuestionId;
+            //    qvm.IsLastQuestion = false;
+            //}
+            //else
+            //{
+            //    qvm.IsLastQuestion = true;
+            //}
 
-            if (QuestionToSolve == null)
-            {
-                return HttpNotFound();
-            }
+            //if (QuestionToSolve == null)
+            //{
+            //    return HttpNotFound();
+            //}
             
-            return View(qvm);
+            //return View(qvm);
         }
 
         // GET: Questions/Create
