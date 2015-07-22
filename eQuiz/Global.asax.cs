@@ -15,7 +15,10 @@ namespace eQuiz
     {
         protected void Application_Start()
         {
+            ViewEngines.Engines.Clear();
+            ViewEngines.Engines.Add(new RazorViewEngine()); 
             //Database.SetInitializer(new MigrateDatabaseToLatestVersion<eQuizContext, Configuration>());
+            /////////////////////////////////////////////////////////////////
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
