@@ -64,7 +64,6 @@ namespace eQuiz.Controllers
 
         // POST: Home/Contact
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Contact(ContactUsViewModel model)
         {
             if (ModelState.IsValid)
