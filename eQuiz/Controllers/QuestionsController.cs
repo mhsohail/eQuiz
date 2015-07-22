@@ -37,11 +37,11 @@ namespace eQuiz.Controllers
             var TimeDiff = QuizStartTime.Subtract(DateTime.Now.ToLocalTime());
             //return QuizStartTime + " - " + DateTime.Now.ToLocalTime() + " - " + TimeDiff;
             TimeZone zone = TimeZone.CurrentTimeZone;
-            // Demonstrate ToLocalTime and ToUniversalTime.
+            // Demonstrate ToLocalTime and ToUniversalTime. 
             DateTime local = zone.ToLocalTime(DateTime.Now);
             DateTime universal = zone.ToUniversalTime(DateTime.Now);
             //return local + " - " + universal + " - " + DateTime.UtcNow.ToLocalTime();
-            string nzTimeZoneKey = "Pakistan Standard Time";
+            string nzTimeZoneKey = "Eastern Standard Time";
             TimeZoneInfo nzTimeZone = TimeZoneInfo.FindSystemTimeZoneById(nzTimeZoneKey);
             DateTime nzDateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, nzTimeZone);
             return nzDateTime + "";
