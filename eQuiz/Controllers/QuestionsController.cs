@@ -35,7 +35,12 @@ namespace eQuiz.Controllers
 
             var QuizStartTime = DateTime.Parse(db.Settings.SingleOrDefault(s => s.Name == "Quiz Start Time").Value);
             var TimeDiff = QuizStartTime.Subtract(DateTime.Now.ToLocalTime());
-            return QuizStartTime + " - " + DateTime.Now.ToLocalTime() + " - " + TimeDiff;
+            //return QuizStartTime + " - " + DateTime.Now.ToLocalTime() + " - " + TimeDiff;
+            TimeZone zone = TimeZone.CurrentTimeZone;
+            // Demonstrate ToLocalTime and ToUniversalTime.
+            DateTime local = zone.ToLocalTime(DateTime.Now);
+            DateTime universal = zone.ToUniversalTime(DateTime.Now);
+            return local + " - " + universal;
             //if (TimeDiff.TotalSeconds > 0)
             //{
             //    return RedirectToAction("Index", "Home");
