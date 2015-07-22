@@ -16,7 +16,8 @@ namespace eQuiz
         protected void Application_Start()
         {
             ViewEngines.Engines.Clear();
-            ViewEngines.Engines.Add(new RazorViewEngine()); 
+            IViewEngine razorEngine = new RazorViewEngine() { FileExtensions = new string[] { "cshtml" } };
+            ViewEngines.Engines.Add(razorEngine); 
             //Database.SetInitializer(new MigrateDatabaseToLatestVersion<eQuizContext, Configuration>());
             /////////////////////////////////////////////////////////////////
             AreaRegistration.RegisterAllAreas();
