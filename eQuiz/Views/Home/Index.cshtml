@@ -47,11 +47,10 @@
 <script src="~/Scripts/moment.min.js"></script>
 <script src="http://momentjs.com/downloads/moment-timezone-with-data.min.js"></script>
 <script src="~/Scripts/moment-with-locales.min.js"></script>
-<script src="moment.js"></script>
-<script src="moment-timezone.js"></script>
-<script src="moment-timezone-data.js"></script>
 <script>
-    moment().tz("America/Los_Angeles").format();
+    define(["moment-timezone", "moment-timezone-data"], function (moment) {
+        moment().tz("America/Los_Angeles").format();
+    });
 </script>
 <style>
     .home-welcome {
