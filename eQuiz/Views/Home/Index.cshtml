@@ -47,7 +47,12 @@
 <script src="~/Scripts/moment.min.js"></script>
 <script src="http://momentjs.com/downloads/moment-timezone-with-data-2010-2020.js"></script>
 <script src="~/Scripts/moment-with-locales.min.js"></script>
-
+<script src="moment.js"></script>
+<script src="moment-timezone.js"></script>
+<script src="moment-timezone-data.js"></script>
+<script>
+    moment().tz("America/Los_Angeles").format();
+</script>
 <style>
     .home-welcome {
         color: black;
