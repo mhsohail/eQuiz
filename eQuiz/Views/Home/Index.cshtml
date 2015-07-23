@@ -86,7 +86,6 @@
     $(window).on('load', function () {
         var QuizStartTime = moment.tz(@ViewBag.QuizStartTime, "America/New_York");
         var labels = ['weeks', 'days', 'hours', 'minutes', 'seconds'],
-            @*nextYear = '@ViewBag.QuizStartTime',*@
             nextYear = QuizStartTime.toDate(),
             template = _.template($('#main-example-template').html()),
             currDate = '00:00:00:00:00',
