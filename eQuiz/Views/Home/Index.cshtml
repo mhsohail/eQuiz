@@ -109,7 +109,7 @@
                 }));
             });
             // Starts the countdown
-            $example.countdown(nextYear, function (event) {
+            $example.countdown(nextYear.toDate(), function (event) {
                 var newDate = event.strftime('%w:%d:%H:%M:%S'), data;
                 if (newDate !== nextDate) {
                     currDate = nextDate;
