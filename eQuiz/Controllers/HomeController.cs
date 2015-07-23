@@ -48,7 +48,7 @@ namespace eQuiz.Controllers
             TimeZoneInfo ESTTimeZone = TimeZoneInfo.FindSystemTimeZoneById(EasternStandardTimeId);
             DateTime ESTDateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, ESTTimeZone);
             var TimeDiff = QuizStartTime.Subtract(ESTDateTime);
-            ViewBag.QuizStartTime = QuizStartTime.AddMilliseconds(TimeDiff.TotalMilliseconds);
+            ViewBag.QuizStartTime = QuizStartTime;
             return View();
         }
 
