@@ -40,7 +40,7 @@ namespace eQuiz.Controllers
             DateTime ESTDateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, ESTTimeZone);
             var TimeDiff = QuizStartTime.Subtract(ESTDateTime);
 
-            return QuizStartTime + " - " + QuizStartTime.AddHours(1) + " - " + TimeDiff.TotalHours;
+            return QuizStartTime + " - " + QuizStartTime.AddHours(10.84) + " - " + TimeDiff.TotalHours;
             //return local + " - " + universal + " - " + DateTime.UtcNow.ToLocalTime();
             
             //TimeZone.CurrentTimeZone.ToLocalTime()
