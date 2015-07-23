@@ -64,10 +64,6 @@
         <p>Quiz begins within:</p>
         <div class="countdown-container" id="main-example"></div>
         <div id="momentjs"></div>
-        <script>
-            var a = moment.tz("2013-11-18 11:55", "America/New_York");
-            document.getElementById("momentjs").innerHTML = a.format();
-        </script>
     </div>
     <script type="text/template" id="main-example-template">
         <div class="time <%= label %>">
@@ -83,7 +79,7 @@
             var tttt = moment.tz("2015-07-24 00:00", "America/New_York").toDate();
             //ViewBag.QuizStartTime
             var QuizStartTime = tttt.toLocaleDateString() + " " + tttt.toLocaleTimeString();
-            alert(QuizStartTime);
+            document.getElementById("momentjs").innerHTML = QuizStartTime;
             var labels = ['weeks', 'days', 'hours', 'minutes', 'seconds'],
             nextYear = QuizStartTime,
             template = _.template($('#main-example-template').html()),
