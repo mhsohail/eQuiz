@@ -80,7 +80,8 @@
     </script>
     <script type="text/javascript">
         $(window).on('load', function () {
-            var QuizStartTime = moment.tz("@ViewBag.QuizStartTime", "America/New_York");
+            //ViewBag.QuizStartTime
+            var QuizStartTime = moment.tz("2015-07-25T01:32:21.196Z", "America/New_York");
             var labels = ['weeks', 'days', 'hours', 'minutes', 'seconds'],
             nextYear = QuizStartTime.toDate(),
             template = _.template($('#main-example-template').html()),
