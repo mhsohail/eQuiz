@@ -45,7 +45,7 @@
 <script src="http://cdn.rawgit.com/hilios/jQuery.countdown/2.0.4/dist/jquery.countdown.min.js"></script>
 
 <script src="http://momentjs.com/downloads/moment.min.js"></script>
-<script src="http://momentjs.com/downloads/moment-with-locales.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.4.0/moment-timezone-with-data-2010-2020.min.js"></script>
 
 <style>
     .home-welcome {
@@ -72,7 +72,7 @@
         </div>
     </script>
     <script type="text/javascript">
-        $(window).on('load', function () {
+        $(window).on('load', function () {alert(moment.tz(@ViewBag.QuizStartTime, "US/Eastern"));
             var labels = ['weeks', 'days', 'hours', 'minutes', 'seconds'],
             nextYear = moment.tz(@ViewBag.QuizStartTime, "US/Eastern"),
             template = _.template($('#main-example-template').html()),
@@ -143,7 +143,7 @@
                 }
             });
         });
-    </script>
+</script>
 </div>
 <script type="text/javascript">
     var nextYear = (new Date().getFullYear() + 1) + "/01/01";
