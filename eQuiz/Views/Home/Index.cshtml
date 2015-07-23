@@ -86,7 +86,7 @@
         $(window).on('load', function () {
             var labels = ['weeks', 'days', 'hours', 'minutes', 'seconds'],
             @*nextYear = '@ViewBag.QuizStartTime',*@
-            nextYear = moment.tz("2015-01-01 00:00", "America/New_York").toDate(),
+            nextYear = moment.tz("2016-01-01 00:00", "America/New_York").toDate(),
             template = _.template($('#main-example-template').html()),
             currDate = '00:00:00:00:00',
             nextDate = '00:00:00:00:00',
