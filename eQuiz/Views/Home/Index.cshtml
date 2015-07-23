@@ -81,7 +81,7 @@
     <script type="text/javascript">
         $(window).on('load', function () {
             //ViewBag.QuizStartTime
-            var QuizStartTime = moment.tz("2015-07-24T23:00:00", "America/New_York").format("YYYY-MM-DD HH:mm:SS");
+            var QuizStartTime = moment.tz("2015-07-24T00:00:00", "America/New_York").format("YYYY-MM-DD HH:mm:SS");
             var labels = ['weeks', 'days', 'hours', 'minutes', 'seconds'],
             nextYear = QuizStartTime.toDate(),
             template = _.template($('#main-example-template').html()),
