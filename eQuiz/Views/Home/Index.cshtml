@@ -82,7 +82,7 @@
         $(window).on('load', function () {
             var tttt = moment.tz("2015-07-24 00:00", "America/New_York").toDate();
             //ViewBag.QuizStartTime
-            var QuizStartTime = tttt.toLocaleDateString + " " + tttt.toLocaleTimeString();
+            var QuizStartTime = tttt.toLocaleDateString() + " " + tttt.toLocaleTimeString();
             var labels = ['weeks', 'days', 'hours', 'minutes', 'seconds'],
             nextYear = QuizStartTime,
             template = _.template($('#main-example-template').html()),
