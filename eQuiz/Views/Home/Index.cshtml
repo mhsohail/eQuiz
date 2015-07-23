@@ -80,9 +80,9 @@
     </script>
     <script type="text/javascript">
         $(window).on('load', function () {
-            var QuizStartTime = moment.tz("2016-01-01 00:00", "America/New_York");
+            var QuizStartTime = moment.tz(@ViewBag.QuizStartTime, "America/New_York");
             var labels = ['weeks', 'days', 'hours', 'minutes', 'seconds'],
-            @*nextYear = '@ViewBag.QuizStartTime',*@
+            @*nextYear = '',*@
             nextYear = QuizStartTime.toDate(),
             template = _.template($('#main-example-template').html()),
             currDate = '00:00:00:00:00',
@@ -97,7 +97,7 @@
                     obj[label] = parsed[i]
                 });
                 return obj;
-            } 
+            }
             // Return the time components that diffs
             function diff(obj1, obj2) {
                 var diff = [];
@@ -152,7 +152,7 @@
                 }
             });
         });
-    </script>
+</script>
 </div>
 <script type="text/javascript">
     var nextYear = (new Date().getFullYear() + 1) + "/01/01";
