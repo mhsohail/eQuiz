@@ -42,8 +42,13 @@ namespace eQuiz.Controllers
             //ViewBag.FirstQuestionId = new eQuizContext().Questions.OrderBy(q => q.QuestionId).FirstOrDefault().QuestionId;
             
             var QuizStartTime = DateTime.Parse(db.Settings.SingleOrDefault(s => s.Name == "Quiz Start Time").Value);
-            ViewBag.QuizStartTime = db.Settings.SingleOrDefault(s => s.Name == "Quiz Start Time").Value;
+            //ViewBag.QuizStartTime = db.Settings.SingleOrDefault(s => s.Name == "Quiz Start Time").Value;
 
+            string EasternStandardTimeId = "Eastern Standard Time";
+            TimeZoneInfo ESTTimeZone = TimeZoneInfo.FindSystemTimeZoneById(EasternStandardTimeId);
+            DateTime ESTDateTime = TimeZoneInfo.ConvertTimeFromUtc(QuizStartTime.ToUniversalTime(), ESTTimeZone);
+            var TimeDiff = QuizStartTime.Subtract(ESTDateTime);
+            ViewBag.QuizStartTime = QuizStartTime.Add(TimeDiff);
             return View();
         }
 
