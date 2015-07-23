@@ -80,10 +80,11 @@
     </script>
     <script type="text/javascript">
         $(window).on('load', function () {
+            var t = moment.tz("2015-07-24 00:00", "America/New_York").toDate();
             //ViewBag.QuizStartTime
-            var QuizStartTime = moment().tz("America/New_York").format("YYYY-MM-DD HH:mm:SS");
+            var QuizStartTime = t.toISOString();
             var labels = ['weeks', 'days', 'hours', 'minutes', 'seconds'],
-            nextYear = QuizStartTime,
+            nextYear = QuizStartTime.toDate(),
             template = _.template($('#main-example-template').html()),
             currDate = '00:00:00:00:00',
             nextDate = '00:00:00:00:00',
