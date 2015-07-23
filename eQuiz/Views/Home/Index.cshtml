@@ -61,6 +61,11 @@
     <div class="main-example">
         <p>Quiz begins within:</p>
         <div class="countdown-container" id="main-example"></div>
+        <div id="momentjs"></div>
+        <script>
+            var a = moment.tz("2013-11-18 11:55", "America/Toronto");
+            document.getElementById("momentjs").innerHTML = a.format();
+        </script>
     </div>
     <script type="text/template" id="main-example-template">
         <div class="time <%= label %>">
