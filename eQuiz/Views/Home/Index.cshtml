@@ -44,9 +44,6 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
 <script src="http://cdn.rawgit.com/hilios/jQuery.countdown/2.0.4/dist/jquery.countdown.min.js"></script>
 
-<script src="~/Scripts/moment.min.js"></script>
-<script src="~/Scripts/moment-with-locales.min.js"></script>
-
 <style>
     .home-welcome {
         color: black;
@@ -79,7 +76,7 @@
     <script type="text/javascript">
         $(window).on('load', function () {
             var labels = ['weeks', 'days', 'hours', 'minutes', 'seconds'],
-            nextYear = moment.tz(@ViewBag.QuizStartTime, "US/Eastern"),
+            nextYear = '@ViewBag.QuizStartTime',
             template = _.template($('#main-example-template').html()),
             currDate = '00:00:00:00:00',
             nextDate = '00:00:00:00:00',
