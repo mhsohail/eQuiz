@@ -44,6 +44,11 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
 <script src="http://cdn.rawgit.com/hilios/jQuery.countdown/2.0.4/dist/jquery.countdown.min.js"></script>
 
+<script src="~/Scripts/moment.min.js"></script>
+<script src="~/Scripts/moment-with-locales.min.js"></script>
+<script src="http://momentjs.com/downloads/moment-timezone.min.js"></script>
+<script src="http://momentjs.com/downloads/moment-timezone-with-data.min.js"></script>
+
 <style>
     .home-welcome {
         color: black;
@@ -70,8 +75,11 @@
     </script>
     <script type="text/javascript">
         $(window).on('load', function () {
+            var tttt = moment.tz("@ViewBag.QuizStartTime", "US/Eastern").toDate();
+            var QuizStartTime = tttt.toLocaleDateString() + " " + tttt.toLocaleTimeString();
+
             var labels = ['weeks', 'days', 'hours', 'minutes', 'seconds'],
-            nextYear = '@ViewBag.QuizStartTime',
+            nextYear = QuizStartTime,
             template = _.template($('#main-example-template').html()),
             currDate = '00:00:00:00:00',
             nextDate = '00:00:00:00:00',
@@ -136,11 +144,11 @@
                 if (document.getElementById("FirstQuestionId").value == 0) {
                     document.getElementById("start-quiz").innerHTML = "<p>You have already compelted the quiz.</p>"
                 } else {
-                    window.location = "/Questions/Details/" + document.getElementById("FirstQuestionId").value;
+                    //window.location = "/Questions/Details/" + document.getElementById("FirstQuestionId").value;
                 }
             });
         });
-    </script>
+</script>
 </div>
 <script type="text/javascript">
     var nextYear = (new Date().getFullYear() + 1) + "/01/01";
