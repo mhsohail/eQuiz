@@ -76,8 +76,7 @@
     </script>
     <script type="text/javascript">
         $(window).on('load', function () {
-            var tttt = moment.tz("2015-07-24T00:00:00-04:00", "US/Eastern").toDate();
-            //ViewBag.QuizStartTime
+            var tttt = moment.tz("@ViewBag.QuizStartTime", "US/Eastern").toDate();
             var QuizStartTime = tttt.toLocaleDateString() + " " + tttt.toLocaleTimeString();
             document.getElementById("momentjs").innerHTML = QuizStartTime;
             var labels = ['weeks', 'days', 'hours', 'minutes', 'seconds'],
