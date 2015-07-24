@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/Account/Register.cshtml" hash="ffffffff885e8f6d" filehash="ffffdac48d774314" flags="110000" assembly="App_Web_1h0pkw4u" type="ASP._Page_Views_Account_Register_cshtml">
+<preserve resultType="2" virtualPath="/Views/Account/Register.cshtml" hash="ffffffff885e8f6d" filehash="ffffdac48d774314" flags="110000" assembly="App_Web_wkwash25" type="ASP._Page_Views_Account_Register_cshtml">
     <filedeps>
         <filedep name="/Views/Account/Register.cshtml" />
     </filedeps>

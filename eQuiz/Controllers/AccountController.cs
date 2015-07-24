@@ -82,9 +82,14 @@ namespace eQuiz.Controllers
             ViewBag.LoginAllowed = true;
 
             var user = await UserManager.FindAsync(model.Email, model.Password);
+            
             bool QuizStarted = false;
             var QuizStartTime = DateTime.Parse(new eQuizContext().Settings.SingleOrDefault(s => s.Name == "Quiz Start Time").Value);
-            var TimeDiff = QuizStartTime.Subtract(DateTime.Now);
+            string EasternStandardTimeId = "Eastern Standard Time";
+            TimeZoneInfo ESTTimeZone = TimeZoneInfo.FindSystemTimeZoneById(EasternStandardTimeId);
+            DateTime ESTDateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, ESTTimeZone);
+            var TimeDiff = QuizStartTime.Subtract(ESTDateTime);
+
             if (TimeDiff.TotalSeconds <= 0)
             {
                 QuizStarted = true;
@@ -187,8 +192,13 @@ namespace eQuiz.Controllers
         public ActionResult Register()
         {
             bool QuizStarted = false;
+
             var QuizStartTime = DateTime.Parse(new eQuizContext().Settings.SingleOrDefault(s => s.Name == "Quiz Start Time").Value);
-            var TimeDiff = QuizStartTime.Subtract(DateTime.Now);
+            string EasternStandardTimeId = "Eastern Standard Time";
+            TimeZoneInfo ESTTimeZone = TimeZoneInfo.FindSystemTimeZoneById(EasternStandardTimeId);
+            DateTime ESTDateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, ESTTimeZone);
+            var TimeDiff = QuizStartTime.Subtract(ESTDateTime);
+            
             if (TimeDiff.TotalSeconds <= 0)
             {
                 QuizStarted = true;
