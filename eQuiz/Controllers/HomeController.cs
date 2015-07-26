@@ -11,6 +11,7 @@ using eQuiz.Helpers;
 using System.Data.Entity;
 using System.Net.Mail;
 using System.Net;
+using StackExchange.Profiling;
 
 namespace eQuiz.Controllers
 {
@@ -18,38 +19,43 @@ namespace eQuiz.Controllers
     {
         eQuizContext db = new eQuizContext();
         ApplicationUser user = null;
+        MiniProfiler profiler; // it's ok if this is null
 
         public HomeController()
         {
-            DbInitializer.Initialize();    
+            DbInitializer.Initialize();
+            profiler = MiniProfiler.Current;
         }
 
         [Authorize]
         public ActionResult Index()
         {
-            var UserId = User.Identity.GetUserId();
-            user = db.Users.Where(u => u.Id == UserId).SingleOrDefault();
-            
-            var UnsolvedQuestions = user.GetUnsolvedQuestions();
-            if (UnsolvedQuestions.Count == 0)
+            using (profiler.Step("Home/Index Action"))
             {
-                ViewBag.FirstQuestionId = 0;
-            }
-            else
-            {
-                ViewBag.FirstQuestionId = UnsolvedQuestions.OrderBy(q => q.QuestionId).FirstOrDefault().QuestionId;
-            }
-            //ViewBag.FirstQuestionId = new eQuizContext().Questions.OrderBy(q => q.QuestionId).FirstOrDefault().QuestionId;
-            
-            var QuizStartTime = DateTime.Parse(db.Settings.SingleOrDefault(s => s.Name == "Quiz Start Time").Value);
-            //ViewBag.QuizStartTime = db.Settings.SingleOrDefault(s => s.Name == "Quiz Start Time").Value;
+                var UserId = User.Identity.GetUserId();
+                user = db.Users.Where(u => u.Id == UserId).SingleOrDefault();
 
-            string EasternStandardTimeId = "Eastern Standard Time";
-            TimeZoneInfo ESTTimeZone = TimeZoneInfo.FindSystemTimeZoneById(EasternStandardTimeId);
-            DateTime ESTDateTime = TimeZoneInfo.ConvertTimeFromUtc(QuizStartTime.ToUniversalTime(), ESTTimeZone);
-            var TimeDiff = QuizStartTime.Subtract(ESTDateTime);
-            ViewBag.QuizStartTime = QuizStartTime.ToString("yyyy-MM-ddTHH:mm:ss-04:00");
-            return View();
+                var UnsolvedQuestions = user.GetUnsolvedQuestions();
+                if (UnsolvedQuestions.Count == 0)
+                {
+                    ViewBag.FirstQuestionId = 0;
+                }
+                else
+                {
+                    ViewBag.FirstQuestionId = UnsolvedQuestions.OrderBy(q => q.QuestionId).FirstOrDefault().QuestionId;
+                }
+                //ViewBag.FirstQuestionId = new eQuizContext().Questions.OrderBy(q => q.QuestionId).FirstOrDefault().QuestionId;
+
+                var QuizStartTime = DateTime.Parse(db.Settings.SingleOrDefault(s => s.Name == "Quiz Start Time").Value);
+                //ViewBag.QuizStartTime = db.Settings.SingleOrDefault(s => s.Name == "Quiz Start Time").Value;
+
+                string EasternStandardTimeId = "Eastern Standard Time";
+                TimeZoneInfo ESTTimeZone = TimeZoneInfo.FindSystemTimeZoneById(EasternStandardTimeId);
+                DateTime ESTDateTime = TimeZoneInfo.ConvertTimeFromUtc(QuizStartTime.ToUniversalTime(), ESTTimeZone);
+                var TimeDiff = QuizStartTime.Subtract(ESTDateTime);
+                ViewBag.QuizStartTime = QuizStartTime.ToString("yyyy-MM-ddTHH:mm:ss-04:00");
+                return View();
+            }
         }
 
         public ActionResult About()
