@@ -76,6 +76,7 @@ C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\Microsoft.Owin.Security.MicrosoftAc
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\Microsoft.Owin.Security.OAuth.dll
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\Microsoft.Owin.Security.Twitter.dll
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\MiniProfiler.dll
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\Mvc.Mailer.dll
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\MvcMembership.dll
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\Newtonsoft.Json.dll
@@ -93,6 +94,8 @@ C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\WebActivator.dll
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\WebGrease.dll
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\EntityFramework.xml
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\EntityFramework.SqlServer.xml
+C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\MiniProfiler.pdb
+C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\MiniProfiler.xml
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\MvcMembership.pdb
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\MvcMembership.xml
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\PagedList.xml
@@ -118,6 +121,7 @@ C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\Microsoft.Owin.Security.OAuth.xml
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.csprojResolveAssemblyReference.cache
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.Migrations.init.resources
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.Migrations.IdentityIdUpdated.resources
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.Migrations.QuestionApplicationUsers_Table_ForeignKey_Name_Changed.resources
@@ -145,4 +149,3 @@ C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.Migrations.QuizInfoMode
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.csproj.GenerateResource.Cache
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.dll
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.pdb
-C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\obj\Debug\eQuiz.csprojResolveAssemblyReference.cache

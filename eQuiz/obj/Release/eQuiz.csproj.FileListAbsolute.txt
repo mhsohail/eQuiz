@@ -89,3 +89,6 @@ C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\MvcMembership.pdb
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\MvcMembership.xml
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\PagedList.xml
 C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\PagedList.Mvc.xml
+C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\MiniProfiler.dll
+C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\MiniProfiler.pdb
+C:\Users\pc\Documents\GitHub\eQuiz\eQuiz\bin\MiniProfiler.xml

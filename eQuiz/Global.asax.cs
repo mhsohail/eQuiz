@@ -1,5 +1,6 @@
 ﻿using eQuiz.Migrations;
 using eQuiz.Models;
+using StackExchange.Profiling;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -24,6 +25,19 @@ namespace eQuiz
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
+
+        protected void Application_BeginRequest()
+        {
+            if (Request.IsLocal)
+            {
+                MiniProfiler.Start();
+            }
+        }
+
+        protected void Application_EndRequest()
+        {
+            MiniProfiler.Stop();
         }
     }
 }
