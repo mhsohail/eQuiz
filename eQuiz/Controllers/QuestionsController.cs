@@ -17,6 +17,15 @@ namespace eQuiz.Controllers
     public class QuestionsController : Controller
     {
         public eQuizContext db = new eQuizContext();
+        string EasternStandardTimeId = string.Empty;
+        TimeZoneInfo ESTTimeZone = null;
+        DateTime ESTDateTime;
+        
+        public QuestionsController()
+        {
+            EasternStandardTimeId = "Eastern Standard Time";
+            ESTTimeZone = TimeZoneInfo.FindSystemTimeZoneById(EasternStandardTimeId);
+        }
 
         // GET: Questions
         [Authorize(Roles = "Administrator")]
@@ -34,9 +43,6 @@ namespace eQuiz.Controllers
             //if (user.QuizInfo != null && user.QuizInfo.HasCompletedQuiz) return RedirectToAction("Result", "Home");
 
             var QuizStartTime = DateTime.Parse(db.Settings.SingleOrDefault(s => s.Name == "Quiz Start Time").Value);
-            
-            string EasternStandardTimeId = "Eastern Standard Time";
-            TimeZoneInfo ESTTimeZone = TimeZoneInfo.FindSystemTimeZoneById(EasternStandardTimeId);
             DateTime ESTDateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, ESTTimeZone);
             var TimeDiff = QuizStartTime.Subtract(ESTDateTime);
 
@@ -68,13 +74,15 @@ namespace eQuiz.Controllers
                     QuestionUser = new QuestionUser();
                     QuestionUser.ApplicationUserId = user.Id;
                     QuestionUser.QuestionId = QuestionToSolve.QuestionId;
-                    QuestionUser.StartTime = DateTime.Now;
-                    QuestionUser.EndTime = DateTime.Now;
+                    ESTDateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, ESTTimeZone);                    
+                    QuestionUser.StartTime = ESTDateTime;
+                    QuestionUser.EndTime = ESTDateTime;
                     db.QuestionUsers.Add(QuestionUser);
                     db.SaveChanges();
                 } else if (!QuestionUser.IsSolved)
                 {
-                    QuestionUser.StartTime = DateTime.Now;
+                    ESTDateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.Now.ToUniversalTime(), ESTTimeZone);
+                    QuestionUser.StartTime = ESTDateTime;
                     db.SaveChanges();
                 }
             }

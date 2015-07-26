@@ -168,7 +168,7 @@ namespace eQuiz.Controllers
 
                 //var QuizStartTime = db.QuestionUsers.OrderBy(qu => qu.StartTime).FirstOrDefault().StartTime;
                 var QuizStartTime = user.QuizInfo.QuizStartDateTime;
-                var QuizEndTime = db.QuestionUsers.OrderByDescending(qu => qu.EndTime).FirstOrDefault().EndTime;
+                var QuizEndTime = user.QuestionUsers.OrderByDescending(qu => qu.EndTime).FirstOrDefault().EndTime;
 
                 TimeSpan TimeSpan = QuizEndTime.Subtract(QuizStartTime);
 

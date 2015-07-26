@@ -21,7 +21,10 @@ namespace eQuiz.Helpers
 
             if (SolvedQvm.IsLastQuestion)
             {
-                QuestionUser.EndTime = DateTime.Now;
+                string EasternStandardTimeId = "Eastern Standard Time";
+                TimeZoneInfo ESTTimeZone = TimeZoneInfo.FindSystemTimeZoneById(EasternStandardTimeId);
+                DateTime ESTDateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.Now.ToUniversalTime(), ESTTimeZone);
+                QuestionUser.EndTime = ESTDateTime;
             }
 
             if (SolvedQvm.SelectedAnswerId == CorrectAnswer.AnswerId)
