@@ -37,14 +37,14 @@ namespace eQuiz.Controllers
 
         // GET: Questions/Details/5
         [Authorize]
-        public async Task<ActionResult> Details(int? id, QuestionViewModel SolvedQvm)
+        public ActionResult Details(int? id, QuestionViewModel SolvedQvm)
         {
             var UserId = User.Identity.GetUserId();
             var userTask = db.Users.Where(u => u.Id == UserId).SingleOrDefaultAsync();
             var QuizStartTimeTask = db.Settings.SingleOrDefaultAsync(s => s.Name == "Quiz Start Time");
             var QuestionToSolveTask = db.Questions.SingleOrDefaultAsync(q => q.QuestionId == id);
 
-            await Task.WhenAll(userTask, QuizStartTimeTask, QuestionToSolveTask);
+            //await Task.WhenAll(userTask, QuizStartTimeTask, QuestionToSolveTask);
             
             var user = userTask.Result;
             if (user.QuizInfo != null && user.QuizInfo.HasCompletedQuiz) return RedirectToAction("Result", "Home");
@@ -74,7 +74,7 @@ namespace eQuiz.Controllers
 
             try
             {
-                var QuestionUser = await db.QuestionUsers.SingleOrDefaultAsync(
+                var QuestionUser = db.QuestionUsers.SingleOrDefault(
                     qu => qu.QuestionId.Equals(QuestionToSolve.QuestionId) &&
                         qu.ApplicationUserId.Equals(user.Id));
                 if (QuestionUser == null)
