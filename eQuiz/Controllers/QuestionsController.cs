@@ -40,15 +40,15 @@ namespace eQuiz.Controllers
         public ActionResult Details(int? id, QuestionViewModel SolvedQvm)
         {
             var UserId = User.Identity.GetUserId();
-            var userTask = db.Users.Where(u => u.Id == UserId).SingleOrDefaultAsync();
-            var QuizStartTimeTask = db.Settings.SingleOrDefaultAsync(s => s.Name == "Quiz Start Time");
-            var QuestionToSolveTask = db.Questions.SingleOrDefaultAsync(q => q.QuestionId == id);
+            var userTask = db.Users.Where(u => u.Id == UserId).SingleOrDefault();
+            var QuizStartTimeTask = db.Settings.SingleOrDefault(s => s.Name == "Quiz Start Time");
+            var QuestionToSolveTask = db.Questions.SingleOrDefault(q => q.QuestionId == id);
 
             //await Task.WhenAll(userTask, QuizStartTimeTask, QuestionToSolveTask);
-            
-            var user = userTask.Result;
+
+            var user = userTask;//.Result;
             if (user.QuizInfo != null && user.QuizInfo.HasCompletedQuiz) return RedirectToAction("Result", "Home");
-            var QuizStartTime = DateTime.Parse(QuizStartTimeTask.Result.Value);
+            var QuizStartTime = DateTime.Parse(QuizStartTimeTask.Value);
             
             DateTime ESTDateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, ESTTimeZone);
             var TimeDiff = QuizStartTime.Subtract(ESTDateTime);
@@ -58,7 +58,7 @@ namespace eQuiz.Controllers
                 return RedirectToAction("Index", "Home");
             }
             
-            Question QuestionToSolve = QuestionToSolveTask.Result;
+            Question QuestionToSolve = QuestionToSolveTask;//.Result;
             
             var UserMngr = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
             //var user = UserMngr.FindById(User.Identity.GetUserId());
