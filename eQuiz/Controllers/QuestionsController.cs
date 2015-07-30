@@ -11,6 +11,7 @@ using eQuiz.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using eQuiz.Helpers;
+using System.Threading.Tasks;
 
 namespace eQuiz.Controllers
 {
@@ -29,20 +30,26 @@ namespace eQuiz.Controllers
 
         // GET: Questions
         [Authorize(Roles = "Administrator")]
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View(db.Questions.ToList());
+            return View(await db.Questions.ToListAsync<Question>());
         }
 
         // GET: Questions/Details/5
         [Authorize]
-        public ActionResult Details(int? id, QuestionViewModel SolvedQvm)
+        public async Task<ActionResult> Details(int? id, QuestionViewModel SolvedQvm)
         {
             var UserId = User.Identity.GetUserId();
-            var user = db.Users.Where(u => u.Id == UserId).SingleOrDefault();
-            //if (user.QuizInfo != null && user.QuizInfo.HasCompletedQuiz) return RedirectToAction("Result", "Home");
+            var userTask = db.Users.Where(u => u.Id == UserId).SingleOrDefaultAsync();
+            var QuizStartTimeTask = db.Settings.SingleOrDefaultAsync(s => s.Name == "Quiz Start Time");
+            var QuestionToSolveTask = db.Questions.SingleOrDefaultAsync(q => q.QuestionId == id);
 
-            var QuizStartTime = DateTime.Parse(db.Settings.SingleOrDefault(s => s.Name == "Quiz Start Time").Value);
+            await Task.WhenAll(userTask, QuizStartTimeTask, QuestionToSolveTask);
+            
+            var user = userTask.Result;
+            if (user.QuizInfo != null && user.QuizInfo.HasCompletedQuiz) return RedirectToAction("Result", "Home");
+            var QuizStartTime = DateTime.Parse(QuizStartTimeTask.Result.Value);
+            
             DateTime ESTDateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, ESTTimeZone);
             var TimeDiff = QuizStartTime.Subtract(ESTDateTime);
 
@@ -51,7 +58,8 @@ namespace eQuiz.Controllers
                 return RedirectToAction("Index", "Home");
             }
             
-            Question QuestionToSolve = db.Questions.SingleOrDefault(q => q.QuestionId == id);
+            Question QuestionToSolve = QuestionToSolveTask.Result;
+            
             var UserMngr = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
             //var user = UserMngr.FindById(User.Identity.GetUserId());
 
@@ -66,7 +74,7 @@ namespace eQuiz.Controllers
 
             try
             {
-                var QuestionUser = db.QuestionUsers.SingleOrDefault(
+                var QuestionUser = await db.QuestionUsers.SingleOrDefaultAsync(
                     qu => qu.QuestionId.Equals(QuestionToSolve.QuestionId) &&
                         qu.ApplicationUserId.Equals(user.Id));
                 if (QuestionUser == null)
@@ -89,7 +97,7 @@ namespace eQuiz.Controllers
             catch (Exception exc) { }
 
             var UnsolvedQuestions = user.GetUnsolvedQuestions();
-            if (UnsolvedQuestions.Count == 0)
+            if (user.QuizInfo != null && user.QuizInfo.HasCompletedQuiz)
             {
                 HttpCookie cookie = new HttpCookie("QuizSolved", true.ToString());
                 Response.Cookies.Add(cookie);

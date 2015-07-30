@@ -34,9 +34,11 @@ namespace eQuiz.Controllers
             {
                 var UserId = User.Identity.GetUserId();
                 user = db.Users.Where(u => u.Id == UserId).SingleOrDefault();
+                if(user == null ) return RedirectToAction("Login", "Account", new { ReturnUrl = "/" });
 
                 var UnsolvedQuestions = user.GetUnsolvedQuestions();
-                if (UnsolvedQuestions.Count == 0)
+
+                if (user.QuizInfo != null && user.QuizInfo.HasCompletedQuiz)
                 {
                     ViewBag.FirstQuestionId = 0;
                 }
