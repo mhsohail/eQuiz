@@ -147,6 +147,7 @@ namespace eQuiz.Controllers
             List<Answer> Answers = QuestionToSolve.Answers;
             var qvm = new QuestionViewModel();
             qvm.Question = QuestionToSolve;
+            Answers.Shuffle();
             qvm.Answers = Answers;
             var NextQuestion = db.Questions.OrderBy(q => q.QuestionId).FirstOrDefault(q => q.QuestionId > id);
             if (NextQuestion != null)
@@ -166,7 +167,7 @@ namespace eQuiz.Controllers
             
             return View(qvm);
         }
-
+        
         // GET: Questions/Create
         [Authorize(Roles = "Administrator")]
         public ActionResult Create()
