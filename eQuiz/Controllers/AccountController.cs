@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -11,9 +9,7 @@ using Microsoft.Owin.Security;
 using eQuiz.Models;
 using System.Net.NetworkInformation;
 using System.Net;
-using System.Net.Sockets;
 using System.Text.RegularExpressions;
-using System.Web.Security;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace eQuiz.Controllers

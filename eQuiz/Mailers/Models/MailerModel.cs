@@ -1,6 +1,3 @@
-using System;
-using System.Linq;
-
 namespace eQuiz.Mailers.Models
 {
     public class MailerModel
