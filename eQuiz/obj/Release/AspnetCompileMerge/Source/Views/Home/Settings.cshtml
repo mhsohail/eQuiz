@@ -46,6 +46,14 @@
                 @Html.Hidden("Settings[" + i + "].Name", Model[i].Name)
             </div>
         }
+        
+        <div class="form-group">
+            @Html.Label("DeletePreviousRecord", "Delete Previoud Record", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class='col-xs-12 col-md-3 col-md-3 col-md-3 input-group date'>
+                <input type="checkbox" id="DeletePreviousRecord" name="DeletePreviousRecord" style="margin-top: 10px;" />
+                @Html.ValidationMessage("DeletePreviousRecord", "", new { @class = "text-danger" })
+            </div>
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

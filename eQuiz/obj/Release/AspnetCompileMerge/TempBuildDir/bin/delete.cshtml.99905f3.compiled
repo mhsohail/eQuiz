@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/Tests/Delete.cshtml" hash="ffffffffa80f3041" filehash="ffffd6082576c3f6" flags="110000" assembly="App_Web_eh5vsegy" type="ASP._Page_Views_Tests_Delete_cshtml">
+<preserve resultType="2" virtualPath="/Views/Tests/Delete.cshtml" hash="ffffffffa80f3041" filehash="ffffd6082576c3f6" flags="110000" assembly="App_Web_rfwmiiuo" type="ASP._Page_Views_Tests_Delete_cshtml">
     <filedeps>
         <filedep name="/Views/Tests/Delete.cshtml" />
     </filedeps>
