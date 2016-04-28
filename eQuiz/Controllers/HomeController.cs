@@ -19,11 +19,16 @@ namespace eQuiz.Controllers
         eQuizContext db = new eQuizContext();
         ApplicationUser user = null;
         MiniProfiler profiler; // it's ok if this is null
-
+        string EasternStandardTimeId = string.Empty;
+        TimeZoneInfo ESTTimeZone = null;
+        DateTime ESTDateTime;
+        
         public HomeController()
         {
             DbInitializer.Initialize();
             profiler = MiniProfiler.Current;
+            EasternStandardTimeId = "Eastern Standard Time";
+            ESTTimeZone = TimeZoneInfo.FindSystemTimeZoneById(EasternStandardTimeId);
         }
 
         [Authorize]
@@ -31,6 +36,8 @@ namespace eQuiz.Controllers
         {
             using (profiler.Step("Home/Index Action"))
             {
+                var model = new HomeModel();
+
                 var UserId = User.Identity.GetUserId();
                 user = db.Users.Where(u => u.Id == UserId).SingleOrDefault();
                 if(user == null ) return RedirectToAction("Login", "Account", new { ReturnUrl = "/" });
@@ -39,13 +46,13 @@ namespace eQuiz.Controllers
 
                 if (user.QuizInfo != null && user.QuizInfo.HasCompletedQuiz)
                 {
-                    ViewBag.FirstQuestionId = 0;
+                    model.FirstQuestionId = 0;
                 }
                 else
                 {
-                    ViewBag.FirstQuestionId = UnsolvedQuestions.OrderBy(q => q.QuestionId).FirstOrDefault().QuestionId;
+                    model.FirstQuestionId = UnsolvedQuestions.OrderBy(q => q.QuestionId).FirstOrDefault().QuestionId;
                 }
-                //ViewBag.FirstQuestionId = new eQuizContext().Questions.OrderBy(q => q.QuestionId).FirstOrDefault().QuestionId;
+                //model.FirstQuestionId = new eQuizContext().Questions.OrderBy(q => q.QuestionId).FirstOrDefault().QuestionId;
 
                 var QuizStartTime = DateTime.Parse(db.Settings.SingleOrDefault(s => s.Name == "Quiz Start Time").Value);
                 //ViewBag.QuizStartTime = db.Settings.SingleOrDefault(s => s.Name == "Quiz Start Time").Value;
@@ -54,8 +61,8 @@ namespace eQuiz.Controllers
                 TimeZoneInfo ESTTimeZone = TimeZoneInfo.FindSystemTimeZoneById(EasternStandardTimeId);
                 DateTime ESTDateTime = TimeZoneInfo.ConvertTimeFromUtc(QuizStartTime.ToUniversalTime(), ESTTimeZone);
                 var TimeDiff = QuizStartTime.Subtract(ESTDateTime);
-                ViewBag.QuizStartTime = QuizStartTime.ToString("yyyy-MM-ddTHH:mm:ss-04:00");
-                return View();
+                model.QuizStartTime = QuizStartTime.ToString("yyyy-MM-ddTHH:mm:ss-04:00");
+                return View(model);
             }
         }
 
@@ -148,7 +155,8 @@ namespace eQuiz.Controllers
         public ActionResult Result(QuestionViewModel SolvedQvm)
         {
             var QSTime = DateTime.Parse(db.Settings.SingleOrDefault(s => s.Name == "Quiz Start Time").Value);
-            var TimeDiff = QSTime.Subtract(DateTime.Now);
+            ESTDateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, ESTTimeZone);
+            var TimeDiff = QSTime.Subtract(ESTDateTime);
             if (TimeDiff.TotalSeconds > 0)
             {
                 return RedirectToAction("Index", "Home");
@@ -234,7 +242,7 @@ namespace eQuiz.Controllers
 
         [Authorize(Roles="Administrator")]
         [HttpPost]
-        public ActionResult CreateSettings(List<Setting> Settings)
+        public ActionResult CreateSettings(List<Setting> Settings, FormCollection form)
         {
             foreach (var Setting in Settings)
             {
@@ -244,6 +252,14 @@ namespace eQuiz.Controllers
                     SettingDb.Value = Setting.Value;
                     db.SaveChanges();
                 }
+            }
+
+            var DeletePreviousRecord = form.Get("DeletePreviousRecord");
+            if (DeletePreviousRecord != null && DeletePreviousRecord.ToLower() == "on")
+            {
+                db.Database.ExecuteSqlCommand("delete from questionusers");
+                db.Database.ExecuteSqlCommand("delete from questionapplicationusers");
+                db.Database.ExecuteSqlCommand("delete from quizinfoes");
             }
 
             return RedirectToAction("Settings");
