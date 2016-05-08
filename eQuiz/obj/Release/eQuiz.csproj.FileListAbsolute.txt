@@ -328,3 +328,5 @@ E:\GitHub\eQuiz\eQuiz\bin\Scripts\jquery.countdown.min.js
 E:\GitHub\eQuiz\eQuiz\bin\Scripts\lodash.min.js
 E:\GitHub\eQuiz\eQuiz\bin\Scripts\moment-timezone-with-data.min.js
 E:\GitHub\eQuiz\eQuiz\bin\Scripts\moment-timezone.min.js
+E:\GitHub\eQuiz\eQuiz\obj\Release\eQuiz.Migrations.Create_LoginTime_Field_in_User_Model.resources
+E:\GitHub\eQuiz\eQuiz\obj\Release\eQuiz.Migrations.Rename_LoginTime_Field_to_LoginTimeUtc.resources
