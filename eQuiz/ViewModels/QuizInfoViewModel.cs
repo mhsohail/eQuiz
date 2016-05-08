@@ -10,5 +10,6 @@ namespace eQuiz.ViewModels
         public TimeSpan QuizTime { get; set; }
         public string UserIpAddress { get; set; }
         public string UserMacAddress { get; set; }
+        public string LoginTime { get; set; }
     }
 }

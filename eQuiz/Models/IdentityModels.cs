@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
+using System;
 
 namespace eQuiz.Models
 {
@@ -19,7 +20,8 @@ namespace eQuiz.Models
         //[Index(IsUnique = true)]
         //[MaxLength(450)]
         public string IpAddress { get; set; }
-        
+        public DateTime LoginTimeUtc { get; set; }
+
         public virtual ICollection<Question> SolvedQuestions { get; set; }
         public virtual ICollection<QuestionUser> QuestionUsers { get; set; }
         public virtual QuizInfo QuizInfo { get; set; }

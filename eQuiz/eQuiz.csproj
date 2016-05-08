@@ -300,6 +300,14 @@
     <Compile Include="Migrations\201507132354403_QuizInfoModelCreated.Designer.cs">
       <DependentUpon>201507132354403_QuizInfoModelCreated.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605081110368_Create_LoginTime_Field_in_User_Model.cs" />
+    <Compile Include="Migrations\201605081110368_Create_LoginTime_Field_in_User_Model.Designer.cs">
+      <DependentUpon>201605081110368_Create_LoginTime_Field_in_User_Model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201605081150199_Rename_LoginTime_Field_to_LoginTimeUtc.cs" />
+    <Compile Include="Migrations\201605081150199_Rename_LoginTime_Field_to_LoginTimeUtc.Designer.cs">
+      <DependentUpon>201605081150199_Rename_LoginTime_Field_to_LoginTimeUtc.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Answer.cs" />
@@ -900,6 +908,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201507132354403_QuizInfoModelCreated.resx">
       <DependentUpon>201507132354403_QuizInfoModelCreated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605081110368_Create_LoginTime_Field_in_User_Model.resx">
+      <DependentUpon>201605081110368_Create_LoginTime_Field_in_User_Model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605081150199_Rename_LoginTime_Field_to_LoginTimeUtc.resx">
+      <DependentUpon>201605081150199_Rename_LoginTime_Field_to_LoginTimeUtc.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
