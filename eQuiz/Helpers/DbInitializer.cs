@@ -127,7 +127,7 @@ namespace eQuiz.Helpers
 
                     if (!(db.Users.Any(u => u.UserName == "melvinlclaxton@gmail.com")))
                     {
-                        var userToInsert = new ApplicationUser { UserName = "melvinlclaxton@gmail.com", Email = "melvinlclaxton@gmail.com", PhoneNumber = "03035332033", LockoutEnabled = true, FirstName = "Muhammad", LastName = "Sohail" };
+                        var userToInsert = new ApplicationUser { UserName = "melvinlclaxton@gmail.com", Email = "melvinlclaxton@gmail.com", PhoneNumber = "03035332033", LockoutEnabled = true, FirstName = "Melvin", LastName = "Claxton" };
                         userManager.Create(userToInsert, "123456");
                     }
 
