@@ -296,6 +296,12 @@ namespace eQuiz.Controllers
                     qifv.UserIpAddress = AppUser.IpAddress;
                     qifv.UserMacAddress = AppUser.MacAddress;
                     qifv.UserEmail = AppUser.Email;
+
+                    string EasternStandardTimeId = "Eastern Standard Time";
+                    TimeZoneInfo ESTTimeZone = TimeZoneInfo.FindSystemTimeZoneById(EasternStandardTimeId);
+                    DateTime ESTDateTime = TimeZoneInfo.ConvertTimeFromUtc(AppUser.LoginTimeUtc, ESTTimeZone);
+
+                    qifv.LoginTime = ESTDateTime.ToString();
                     QuizInfos.Add(qifv);
                 }
             }

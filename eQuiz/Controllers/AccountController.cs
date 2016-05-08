@@ -11,6 +11,7 @@ using System.Net.NetworkInformation;
 using System.Net;
 using System.Text.RegularExpressions;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
 
 namespace eQuiz.Controllers
 {
@@ -19,15 +20,18 @@ namespace eQuiz.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private eQuizContext context;
 
         public AccountController()
         {
+            context = new eQuizContext();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            context = new eQuizContext();
         }
 
         public ApplicationSignInManager SignInManager
@@ -91,7 +95,7 @@ namespace eQuiz.Controllers
                 QuizStarted = true;
             }
             
-            var UserRequested = new eQuizContext().Users.SingleOrDefault(u => u.Email.Equals(model.Email));
+            var UserRequested = context.Users.SingleOrDefault(u => u.Email.Equals(model.Email));
             var UserRole = UserRequested.Roles.FirstOrDefault();
             
             var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
@@ -127,6 +131,9 @@ namespace eQuiz.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    UserRequested.LoginTimeUtc = DateTime.UtcNow;
+                    context.Entry(UserRequested).State = EntityState.Modified;
+                    context.SaveChanges();
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
