@@ -80,48 +80,50 @@ namespace eQuiz.Controllers
             }
 
             ViewBag.LoginAllowed = true;
-
+            ApplicationUser UserRequested = null;
             var user = await UserManager.FindAsync(model.Email, model.Password);
-            
-            bool QuizStarted = false;
-            var QuizStartTime = DateTime.Parse(new eQuizContext().Settings.SingleOrDefault(s => s.Name == "Quiz Start Time").Value);
-            string EasternStandardTimeId = "Eastern Standard Time";
-            TimeZoneInfo ESTTimeZone = TimeZoneInfo.FindSystemTimeZoneById(EasternStandardTimeId);
-            DateTime ESTDateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, ESTTimeZone);
-            var TimeDiff = QuizStartTime.Subtract(ESTDateTime);
-
-            if (TimeDiff.TotalSeconds <= 0)
+            if (user != null)
             {
-                QuizStarted = true;
-            }
-            
-            var UserRequested = context.Users.SingleOrDefault(u => u.Email.Equals(model.Email));
-            var UserRole = UserRequested.Roles.FirstOrDefault();
-            
-            var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
-            var AdminUsers = RoleManager.Roles.SingleOrDefault(r => r.Name.Equals("Administrator")).Users;
+                bool QuizStarted = false;
+                var QuizStartTime = DateTime.Parse(new eQuizContext().Settings.SingleOrDefault(s => s.Name == "Quiz Start Time").Value);
+                string EasternStandardTimeId = "Eastern Standard Time";
+                TimeZoneInfo ESTTimeZone = TimeZoneInfo.FindSystemTimeZoneById(EasternStandardTimeId);
+                DateTime ESTDateTime = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, ESTTimeZone);
+                var TimeDiff = QuizStartTime.Subtract(ESTDateTime);
 
-            bool IsAdmin = false;
-            foreach (var AdminUser in AdminUsers)
-            {
-                if(UserRole == null)
+                if (TimeDiff.TotalSeconds <= 0)
                 {
-                    break;
+                    QuizStarted = true;
                 }
 
-                if (AdminUser.UserId == UserRole.UserId)
-                {
-                    IsAdmin = true;
-                    break;
-                }
-            }
+                UserRequested = context.Users.SingleOrDefault(u => u.Email.Equals(model.Email));
+                var UserRole = UserRequested.Roles.FirstOrDefault();
 
-            if(!IsAdmin && QuizStarted)
-            {
-                if (user.QuizInfo == null || !user.QuizInfo.HasCompletedQuiz)
+                var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(new ApplicationDbContext()));
+                var AdminUsers = RoleManager.Roles.SingleOrDefault(r => r.Name.Equals("Administrator")).Users;
+
+                bool IsAdmin = false;
+                foreach (var AdminUser in AdminUsers)
                 {
-                    ViewBag.LoginAllowed = false;
-                    return View(model);
+                    if (UserRole == null)
+                    {
+                        break;
+                    }
+
+                    if (AdminUser.UserId == UserRole.UserId)
+                    {
+                        IsAdmin = true;
+                        break;
+                    }
+                }
+
+                if (!IsAdmin && QuizStarted)
+                {
+                    if (user.QuizInfo == null || !user.QuizInfo.HasCompletedQuiz)
+                    {
+                        ViewBag.LoginAllowed = false;
+                        return View(model);
+                    }
                 }
             }
 
@@ -131,9 +133,12 @@ namespace eQuiz.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    UserRequested.LoginTimeUtc = DateTime.UtcNow;
-                    context.Entry(UserRequested).State = EntityState.Modified;
-                    context.SaveChanges();
+                    if (UserRequested != null)
+                    {
+                        UserRequested.LoginTimeUtc = DateTime.UtcNow;
+                        context.Entry(UserRequested).State = EntityState.Modified;
+                        context.SaveChanges();
+                    }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -243,7 +248,8 @@ namespace eQuiz.Controllers
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     MacAddress = MacAddress,
-                    IpAddress = GetIPAddress()
+                    IpAddress = GetIPAddress(),
+                    LoginTimeUtc = DateTime.UtcNow
                 };
                 
                 var result = await UserManager.CreateAsync(user, model.Password);
