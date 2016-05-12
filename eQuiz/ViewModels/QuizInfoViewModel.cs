@@ -11,5 +11,6 @@ namespace eQuiz.ViewModels
         public string UserIpAddress { get; set; }
         public string UserMacAddress { get; set; }
         public string LoginTime { get; set; }
+        public bool HasCompletedQuiz { get; set; }
     }
 }

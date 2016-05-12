@@ -275,6 +275,7 @@ namespace eQuiz.Controllers
         {
             var AppUsers = db.Users.Where(u => u.QuizInfo != null).ToList();
             var QuizInfos = new List<QuizInfoViewModel>();
+            var UsersCompletedQuizCount = db.Users.Where(u => u.QuizInfo != null && u.QuizInfo.HasCompletedQuiz).ToList().Count;
 
             foreach (var AppUser in AppUsers)
             {
@@ -296,6 +297,7 @@ namespace eQuiz.Controllers
                     qifv.UserIpAddress = AppUser.IpAddress;
                     qifv.UserMacAddress = AppUser.MacAddress;
                     qifv.UserEmail = AppUser.Email;
+                    qifv.HasCompletedQuiz = AppUser.QuizInfo.HasCompletedQuiz;
 
                     string EasternStandardTimeId = "Eastern Standard Time";
                     TimeZoneInfo ESTTimeZone = TimeZoneInfo.FindSystemTimeZoneById(EasternStandardTimeId);
@@ -306,6 +308,7 @@ namespace eQuiz.Controllers
                 }
             }
 
+            ViewBag.UsersCompletedQuizCount = UsersCompletedQuizCount;
             var QuizInfosOrdered = QuizInfos.OrderByDescending(qi => qi.CorrectAnswersCount).ThenBy(qi => qi.QuizTime).ToList();
             return View(QuizInfosOrdered);
         }

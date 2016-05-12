@@ -10,11 +10,28 @@
 <div class="row">
     <div class="col-md-12">
         <table class="table table-striped">
+            <p>Total of @ViewBag.UsersCompletedQuizCount users completed the quiz.</p>
             <thead><tr><th>Name</th><th>Email</th><th>Correct Answers</th><th>Login Time</th><th>Quiz Time</th><th>IP Address</th></tr></thead>
             <tbody>
                 @foreach (var qivm in Model)
                 {
-                    <tr><td>@qivm.UserFullName</td><td>@qivm.UserEmail</td><td>@qivm.CorrectAnswersCount</td><td>@qivm.LoginTime</td><td>@qivm.QuizTime.Hours Hours : @qivm.QuizTime.Minutes Minutes : @qivm.QuizTime.Seconds Seconds : @qivm.QuizTime.Milliseconds Milliseconds</td><td>@qivm.UserIpAddress</td></tr>
+                    <tr>
+                        <td>@qivm.UserFullName</td>
+                        <td>@qivm.UserEmail</td>
+                        <td>@qivm.CorrectAnswersCount</td>
+                        <td>@qivm.LoginTime</td>
+                        <td>
+                            @if (qivm.HasCompletedQuiz)
+                            {
+                                @qivm.QuizTime.Hours<text> Hours :</text> @qivm.QuizTime.Minutes<text> Minutes :</text> @qivm.QuizTime.Seconds<text> Seconds :</text> @qivm.QuizTime.Milliseconds <text>Milliseconds</text>
+                            }
+                            else
+                            {
+                                <text>did not complete quiz yet</text>
+                            }
+                        </td>
+                        <td>@qivm.UserIpAddress</td>
+                    </tr>
                 }
             </tbody>
         </table>
