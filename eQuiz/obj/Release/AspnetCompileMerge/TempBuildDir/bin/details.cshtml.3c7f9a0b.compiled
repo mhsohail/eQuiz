@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/UsersAdmin/Details.cshtml" hash="ffffffffa80f3041" filehash="ffffc4cee09ceafb" flags="110000" assembly="App_Web_4zmtm1ku" type="ASP._Page_Views_UsersAdmin_Details_cshtml">
+<preserve resultType="2" virtualPath="/Views/UsersAdmin/Details.cshtml" hash="ffffffffa80f3041" filehash="ffffc4cee09ceafb" flags="110000" assembly="App_Web_pzwgxbyp" type="ASP._Page_Views_UsersAdmin_Details_cshtml">
     <filedeps>
         <filedep name="/Views/UsersAdmin/Details.cshtml" />
     </filedeps>

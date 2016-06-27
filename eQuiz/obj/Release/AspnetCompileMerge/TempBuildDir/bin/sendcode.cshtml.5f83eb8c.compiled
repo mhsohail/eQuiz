@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/Account/SendCode.cshtml" hash="ffffffffa80f3041" filehash="1eb9983256f1" flags="110000" assembly="App_Web_ui2xwve3" type="ASP._Page_Views_Account_SendCode_cshtml">
+<preserve resultType="2" virtualPath="/Views/Account/SendCode.cshtml" hash="ffffffffa80f3041" filehash="1eb9983256f1" flags="110000" assembly="App_Web_plreihdw" type="ASP._Page_Views_Account_SendCode_cshtml">
     <filedeps>
         <filedep name="/Views/Account/SendCode.cshtml" />
     </filedeps>

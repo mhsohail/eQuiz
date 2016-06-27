@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<preserve resultType="2" virtualPath="/Views/Home/QuizInfo.cshtml" hash="ffffffffa80f3041" filehash="fffff525556414c2" flags="110000" assembly="App_Web_dxcqdno2" type="ASP._Page_Views_Home_QuizInfo_cshtml">
+<preserve resultType="2" virtualPath="/Views/Home/QuizInfo.cshtml" hash="ffffffffa80f3041" filehash="fffff5271ac8154d" flags="110000" assembly="App_Web_d5zikjxd" type="ASP._Page_Views_Home_QuizInfo_cshtml">
     <filedeps>
         <filedep name="/Views/Home/QuizInfo.cshtml" />
     </filedeps>
