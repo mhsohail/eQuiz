@@ -193,6 +193,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\QuestionsController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\TestsController.cs" />
     <Compile Include="Controllers\UsersAdminController.cs" />
     <Compile Include="Extensions.cs" />
@@ -828,9 +829,12 @@
     <Content Include="Views\UsersAdmin\Details.cshtml" />
     <Content Include="Views\UsersAdmin\Edit.cshtml" />
     <Content Include="Views\UsersAdmin\Index.cshtml" />
+    <Content Include="Views\Home\AsyncTest.cshtml" />
+    <Content Include="Views\Home\Crop.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Task\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
