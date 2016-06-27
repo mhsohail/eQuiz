@@ -11,6 +11,8 @@ using System.Data.Entity;
 using System.Net.Mail;
 using System.Net;
 using StackExchange.Profiling;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace eQuiz.Controllers
 {
@@ -311,6 +313,22 @@ namespace eQuiz.Controllers
             ViewBag.UsersCompletedQuizCount = UsersCompletedQuizCount;
             var QuizInfosOrdered = QuizInfos.OrderByDescending(qi => qi.CorrectAnswersCount).ThenBy(qi => qi.QuizTime).ToList();
             return View(QuizInfosOrdered);
+        }
+        
+        public async Task<ActionResult> AsyncTest()
+        {
+            await Task.Run(() => waitTimer());
+            return RedirectToAction("Index", "Home");
+        }
+
+        public void waitTimer()
+        {
+            Thread.Sleep(10000);
+        }
+
+        public ActionResult Crop()
+        {
+            return View();
         }
     }
 }
